@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-family: 'Manrope', sans-serif;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: overlay;
+  color: white;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+section {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+#main {
+  padding: 0 21px;
+  padding-top: 25vh;
+  height: 100vh;
+}
+
+#Bookmarks {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 15px;
+}
+
+#Bookmarks .Bookmark {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 42px 1fr;
+      grid-template-columns: 42px 1fr;
+  padding: 6px 0;
+  background-color: rgba(47, 43, 48, 0.568);
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  -webkit-transition: background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+}
+
+#Bookmarks .Bookmark:hover {
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+          box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+  background-color: rgba(110, 103, 112, 0.226);
+  background-color: rgba(27, 26, 27, 0.671);
+}
+
+#Bookmarks .Bookmark .BookmarkIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#Bookmarks .Bookmark .BookmarkInfo .BookmarkInfo_Url {
+  font-size: .7rem;
+}
+
+@media only screen and (max-width: 600px) {
+  #Bookmarks {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+
+#Clock {
+  font-size: 3rem;
+  min-width: 220px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#Date {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-bottom: 12px;
+}
+
+#Toolbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 2em;
+}
+
+#SearchBox {
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#SearchBox .blur {
+  display: inline-block;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+}
+
+input {
+  background: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+  border: none;
+  padding: 12px 6px 10px 12px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  color: white;
+  background-color: rgba(47, 43, 48, 0.568);
+  border-radius: 5px;
+  -webkit-transition: background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, -webkit-box-shadow 0.2s ease;
+}
+
+input:hover, input:focus {
+  -webkit-box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+          box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+  background-color: rgba(110, 103, 112, 0.226);
+  background-color: rgba(27, 26, 27, 0.671);
+}
+
+.iconButton {
+  font-size: 1.6rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 46px;
+  height: 46px;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.iconButton:hover {
+  background: rgba(31, 30, 30, 0.295);
+}
+
+.iconButton:hover:active {
+  background: rgba(31, 30, 30, 0.404);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#Background_LocalVideo {
+  position: fixed;
+  top: -500px;
+  left: -300px;
+  z-index: -43;
+  -webkit-filter: blur(14px);
+          filter: blur(14px);
+}
+
+#Background_ImageUrl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -54;
+  background-size: cover;
+  background-image: url("../media/wallpaper1080.png");
+}
+
+.DrawerRoot {
+  position: fixed;
+  top: 0;
+  left: -355px;
+  bottom: 0;
+  background-color: white;
+  color: black;
+  width: 360px;
+  opacity: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: left 0.2s ease, opacity 0.2s ease;
+  transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+.DrawerRoot:hover {
+  opacity: 1;
+  left: 0;
+}
+
+.DrawerRoot .DrawerHeader {
+  margin-top: 12px;
+  padding: 12px 24px;
+}
+
+.SteamGame {
+  padding: 0 23px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.SteamGame .SteamGame_Backdrop {
+  position: absolute;
+  top: calc($drawerWidth / 2);
+  left: 0;
+  width: 360px;
+  z-index: -6;
+  opacity: 0;
+  -webkit-filter: blur(15px);
+          filter: blur(15px);
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.SteamGame:hover {
+  background-color: rgba(0, 0, 0, 0.308);
+  color: white;
+}
+
+.SteamGame:hover .SteamGame_Backdrop {
+  opacity: 1;
+}
+
+.SteamGame .SteamGame_Icon {
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+
+.SteamGame .SteamGame_Label {
+  text-indent: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+/*# sourceMappingURL=global.css.map */

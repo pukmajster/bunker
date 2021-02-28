@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Manrope', sans-serif;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: overlay;
+    color: white;
+}
+
+h3 {
+    font-weight: 500;
+}
+
+section {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+
+#main {
+    padding: 0 21px;
+    padding-top: 25vh;
+    height: 100vh;
+}
+
+#Bookmarks {
+    user-select: none;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-gap: 15px;
+
+    .Bookmark {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        padding: 6px 0;
+
+        background-color: rgba(47, 43, 48, 0.568);
+        border-radius: 5px;
+        backdrop-filter: blur(12px);
+
+        transition: box-shadow .2s ease,  background-color .2s ease,;
+
+        &:hover {
+            box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+
+            background-color: rgba(110, 103, 112, 0.226);
+            background-color: rgba(27, 26, 27, 0.671);
+        }
+
+        .BookmarkIcon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .BookmarkInfo {
+
+            
+
+
+            .BookmarkInfo_Label {
+                
+                
+
+            }
+
+            .BookmarkInfo_Url {
+                font-size: .7rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #Bookmarks {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+#Clock {
+    font-size: 3rem;
+    min-width: 220px;
+    user-select: none;
+}
+
+#Date {
+    user-select: none;
+    margin-bottom: 12px;
+}
+
+#Toolbar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+
+#SearchBox {
+    flex: 0;
+    display: flex;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+
+    .blur {
+        display: inline-block;
+        width: 100%;
+        max-width: 480px;
+        border-radius: 5px;
+        backdrop-filter: blur(12px);;
+    }
+}
+
+
+input {
+    background: none;
+    box-shadow: none;
+    outline: none;
+
+    border: none;
+    padding:
+    12px
+    6px
+    10px
+    12px;
+
+    font-size: 1rem;
+    width: 100%;
+    
+    max-width: 600px;
+    height: 100%;
+
+    color: white;
+
+    background-color: rgba(47, 43, 48, 0.568);
+    border-radius: 5px;
+
+    transition: box-shadow .2s ease,  background-color .2s ease,;
+
+    &:hover, &:focus {
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+
+        background-color: rgba(110, 103, 112, 0.226);
+        background-color: rgba(27, 26, 27, 0.671);
+    }
+}
+
+.iconButton {
+    font-size: 1.6rem;
+    appearance: none;
+    width: 46px;
+    height: 46px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+    user-select: none;
+    
+    &:hover {
+        background: rgba(31, 30, 30, 0.295);
+
+        &:active {
+            background: rgba(31, 30, 30, 0.404);
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#Background_LocalVideo {
+    position: fixed;
+    top: -500px;
+    left: -300px;
+    z-index: -43;
+
+    filter: blur(14px);
+}
+
+#Background_ImageUrl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -54;
+    background-size: cover;
+    background-image: url('../media/wallpaper1080.png');
+}
+
+$drawerWidth: 360px;
+$drawerOffset: 5px;
+
+.DrawerRoot {
+    position: fixed;
+    top: 0;
+    left: -$drawerWidth + $drawerOffset;
+    bottom: 0;
+    background-color: white;
+    color: black;
+    width: $drawerWidth;
+    opacity: 0;;
+    user-select: none;
+    transition: left 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+        left: 0;
+    }
+
+    .DrawerHeader {
+        margin-top: 12px;
+        padding: 12px 24px;
+    }
+}
+
+.SteamGame {
+    padding: 0 23px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    .SteamGame_Backdrop {
+        position: absolute;
+        top: calc($drawerWidth / 2);
+        left: 0;
+        width: $drawerWidth;
+        z-index: -6;
+        opacity: 0;
+        
+        transform: scale(1.2);
+    }
+    
+
+    &:hover {
+        // background-color: rgb(219, 219, 219);
+        // background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.308);
+        color: white;
+       
+        .SteamGame_Backdrop {
+            opacity: 1;
+
+            // I chose to not always blur the backdrop, but only when hovered.
+            // This is because if we move blurred elements around, we get weird blur artifacting on non-moving blur elements.
+            // Good job, Chrome. 
+            filter: blur(15px);
+        }
+    }
+
+    .SteamGame_Icon {
+        transform: scale(0.7);
+    }
+
+    .SteamGame_Label {
+        text-indent: 10px;
+    }
+
+
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
