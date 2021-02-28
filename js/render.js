@@ -147,7 +147,7 @@ function GamesDrawer() {
 
 function SteamGame({ id, title, logoHash }) {
     return html`
-        <a href="steam://rungameid/${id}" target="_blank" >
+        <a href="steam://rungameid/${id}" >
             
             <div class="SteamGame aSteamGame--expandable" >
                 <!-- <div class="SteamGame_Actions" >
