@@ -57,6 +57,8 @@ function prepSearchHandling(e) {
 
 var activeSpeach = false;
 
+// TODO: Fixed buggy toggling on the button
+
 function prepSpeachRecognition() {
     try {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -64,8 +66,6 @@ function prepSpeachRecognition() {
     }
     catch (e) {
         console.error(e);
-        $('.no-browser-support').show();
-        $('.app').hide();
     }
 
     recognition.onstart = function () {
@@ -88,11 +88,9 @@ function prepSpeachRecognition() {
     }
 
     recognition.onresult = function (event) {
-        var current = event.resultIndex;
-        var transcript = event.results[current][0].transcript;
+        var transcript = event.results[event.resultIndex][0].transcript;
         console.log(transcript)
-
-        searchForPhrase(transcript, true);
+        searchForPhrase(transcript, false);
     }
 
     let elem = document.getElementById('Search_VoiceRecognition');
