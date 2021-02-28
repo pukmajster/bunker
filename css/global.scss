@@ -16,7 +16,6 @@ html {
 body {
     margin: 0;
     padding: 0;
-    overflow-y: overlay;
     color: white;
 }
 
@@ -209,7 +208,7 @@ a {
 }
 
 $drawerWidth: 360px;
-$drawerOffset: 5px;
+$drawerOffset: 15px;
 
 .DrawerRoot {
     position: fixed;
@@ -220,7 +219,6 @@ $drawerOffset: 5px;
     color: black;
     width: $drawerWidth;
     opacity: 0;;
-    user-select: none;
     transition: left 0.2s ease, opacity 0.2s ease;
 
     &:hover {
@@ -240,7 +238,9 @@ $drawerOffset: 5px;
     align-items: center;
     position: relative;
     overflow: hidden;
-    user-select: none;
+
+    transition: padding-top 0.2s ease, padding-bottom 0.2s ease ;
+
     .SteamGame_Backdrop {
         position: absolute;
         top: calc($drawerWidth / 2);
@@ -254,11 +254,17 @@ $drawerOffset: 5px;
     
 
     &:hover {
-        // background-color: rgb(219, 219, 219);
-        // background-color: rgb(0, 0, 0);
         background-color: rgba(0, 0, 0, 0.308);
         color: white;
+        font-weight: 600;
        
+        // padding-top: 15px ;
+
+        &.SteamGame--expandable {
+            padding-bottom: 28px ;
+        }
+        
+
         .SteamGame_Backdrop {
             opacity: 1;
 
@@ -271,22 +277,81 @@ $drawerOffset: 5px;
 
     .SteamGame_Icon {
         transform: scale(0.7);
+        user-select: none;
     }
 
     .SteamGame_Label {
+        user-select: none;
         text-indent: 10px;
     }
 
-
+    .SteamGame_Actions {
+        position: absolute;
+        top: 44px;
+        left: 79px;
+        z-index: 3;
+    }
 }
-
-
 
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 0;
 }
 
 ::-webkit-scrollbar-track {
-    display: none;
+    // display: none;
 }
+
+// https://codepen.io/alphardex/pen/dyPorwJ
+#Snow {
+    position: fixed;
+    top: 0;;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -5;
+}
+
+@function random_range($min, $max) {
+    $rand: random();
+    $random_range: $min + floor($rand * (($max - $min) + 1));
+    @return $random_range;
+  }
+  
+  .snow {
+    $total: 200;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+  
+    @for $i from 1 through $total {
+      $random-x: random(1000000) * 0.0001vw;
+      $random-offset: random_range(-100000, 100000) * 0.0001vw;
+      $random-x-end: $random-x + $random-offset;
+      $random-x-end-yoyo: $random-x + ($random-offset / 2);
+      $random-yoyo-time: random_range(30000, 80000) / 100000;
+      $random-yoyo-y: $random-yoyo-time * 100vh;
+      $random-scale: random(10000) * 0.0001;
+      $fall-duration: random_range(10, 30) * 1s;
+      $fall-delay: random(30) * -1s;
+  
+      &:nth-child(#{$i}) {
+        opacity: random(10000) * 0.0001;
+        transform: translate($random-x, -10px) scale($random-scale);
+        animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+      }
+  
+      @keyframes fall-#{$i} {
+        #{percentage($random-yoyo-time)} {
+          transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
+        }
+  
+        to {
+          transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
+        }
+      }
+    }
+  }
+  
