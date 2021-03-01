@@ -113,10 +113,9 @@ function Root() {
                             url: 'https://mail.google.com'
                         })}
                         ${Bookmark2({
-                            label: 'Messages',
-                            url: 'https://messages.google.com/web/conversations',
-                            baseUrl: 'https://messages.google.com',
-                            
+                            label: 'Docs',
+                            url: 'https://docs.google.com/document/u/0/',
+                            baseUrl: 'https://docs.google.com',
                         })}
                         ${Bookmark2({
                             label: 'Spreadsheets',
