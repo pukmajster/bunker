@@ -1,0 +1,152 @@
+
+#Bookmarks {
+    user-select: none;
+    display: grid;
+    display: none;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-gap: 15px;
+
+    .Bookmark {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        padding: 6px 0;
+        min-height: 50px;
+
+        background-color: rgba(47, 43, 48, 0.568);
+        border-radius: 5px;
+        backdrop-filter: blur(12px);
+
+        transition: box-shadow .2s ease,  background-color .2s ease,;
+
+        
+
+        .BookmarkIcon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .BookmarkInfo {
+
+            .BookmarkInfo_Label {
+                transition: transform 0.2s ease;
+                transform: translateY(8px);
+                backface-visibility: hidden;
+            }
+
+            .BookmarkInfo_Url {
+                transition: transform 0.2s ease, opacity 0.2s ease;
+                font-size: .7rem;
+                opacity: 0;
+                backface-visibility: hidden;
+                transform: translateY(-16px);
+            }
+        }
+        
+        &:hover {
+            box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+
+            // background-color: rgba(110, 103, 112, 0.226);
+            background-color: rgba(27, 26, 27, 0.671);
+
+            .BookmarkInfo {
+                .BookmarkInfo_Label {
+                    -webkit-font-smoothing: subpixel-antialiased;
+                    transform: translateY(1px);
+                }
+    
+                .BookmarkInfo_Url {
+                    transform: translateY(0);
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+#Bookmarks2 {
+    user-select: none;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-gap: 15px;
+    // align-items: baseline;
+
+    .BookmarkCategory {
+        background-color: rgba(47, 43, 48, 0.568);
+        border-radius: 5px;
+        backdrop-filter: blur(12px);
+        padding: 15px;
+
+        .BookmarkCategory_Label {
+            margin-bottom: 5px;
+        }
+    }
+
+    .Bookmark {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        padding: 6px 0;
+        min-height: 50px;
+
+        border-radius: 5px;
+
+        transition: box-shadow .2s ease,  background-color .2s ease,;
+
+        
+
+        .BookmarkIcon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .BookmarkInfo {
+
+            .BookmarkInfo_Label {
+                transition: transform 0.2s ease;
+                transform: translateY(8px);
+                backface-visibility: hidden;
+            }
+
+            .BookmarkInfo_Url {
+                transition: transform 0.2s ease, opacity 0.2s ease;
+                font-size: .7rem;
+                opacity: 0;
+                backface-visibility: hidden;
+                transform: translateY(-16px);
+            }
+        }
+        
+        &:hover {
+            box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+
+            // box-shadow: 0 2px 8px 3px rgba(0, 0, 0, .3);
+
+            background-color: rgba(110, 103, 112, 0.226);
+            background-color: rgba(27, 26, 27, 0.445);
+
+            .BookmarkInfo {
+                .BookmarkInfo_Label {
+                    -webkit-font-smoothing: subpixel-antialiased;
+                    transform: translateY(1px);
+                }
+    
+                .BookmarkInfo_Url {
+                    transform: translateY(0);
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    #Bookmarks, #Bookmarks2 {
+        grid-template-columns: 1fr 1fr;
+    }
+}

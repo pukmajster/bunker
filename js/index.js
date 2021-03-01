@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function (event) {
     startTime()
-    prepSpeachRecognition()
+    prepSpeechRecognition()
     prepSearchHandling();
 });
 
@@ -52,17 +52,28 @@ function prepSearchHandling(e) {
 
 
 // -------------------------------------------------------------------------
-//  Speach recognition for google search
+//  Speech recognition for google search
 // -------------------------------------------------------------------------
 
-var activeSpeach = false;
+let activeSpeech = false;
+let recognitionHandle;
+
+let toggleVoiceRecognition = () => {
+    if(activeSpeech) {
+        recognitionHandle.stop();
+    } else {
+        recognitionHandle.start();
+    }
+    activeSpeech = !activeSpeech;
+}
 
 // TODO: Fixed buggy toggling on the button
-
-function prepSpeachRecognition() {
+function prepSpeechRecognition() {
     try {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognition = new SpeechRecognition();
+
+        recognitionHandle = recognition;
     }
     catch (e) {
         console.error(e);
@@ -89,18 +100,21 @@ function prepSpeachRecognition() {
 
     recognition.onresult = function (event) {
         var transcript = event.results[event.resultIndex][0].transcript;
-        console.log(transcript)
+        // console.log(transcript)
         searchForPhrase(transcript, false);
     }
 
     let elem = document.getElementById('Search_VoiceRecognition');
-    elem.onclick = function (e) {
-        if(activeSpeach) {
-            recognition.stop();
-        } else {
-            recognition.start();
-        }
-
-        activeSpeach = !activeSpeach;
-    };
+    elem.onclick = () => toggleVoiceRecognition();
 }
+
+// -------------------------------------------------------------------------
+//  Focus on the search input when pressing anykey if not already focused
+// -------------------------------------------------------------------------
+
+document.addEventListener("keydown", (e) => {
+    if( e.keyCode === 18 ) {
+        e.preventDefault();
+        toggleVoiceRecognition();   
+    } else document.getElementById('Search_Input')?.focus();
+}, false);

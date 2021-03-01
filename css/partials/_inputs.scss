@@ -1,0 +1,109 @@
+
+input {
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+
+    padding:
+    12px
+    6px
+    10px
+    12px;
+
+    font-size: 1rem;
+    width: 100%;
+    
+    max-width: 600px;
+    height: 100%;
+
+    color: white;
+
+    background-color: rgba(47, 43, 48, 0.568);
+    border-radius: 5px;
+
+    transition: box-shadow .2s ease,  background-color .2s ease,;
+
+    &:hover, &:focus {
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+
+        background-color: rgba(110, 103, 112, 0.226);
+        background-color: rgba(27, 26, 27, 0.671);
+    }
+}
+
+select {
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    appearance: none;
+    padding:
+    12px
+    12px
+    10px
+    12px;
+
+    font-size: 1rem;
+    width: 100%;
+
+    color: white;
+    cursor: pointer;
+
+    background-color: rgba(47, 43, 48, 0.568);
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    transition: box-shadow .2s ease,  background-color .2s ease;
+    background-image:
+    linear-gradient(45deg, transparent 50%, rgb(255, 255, 255) 50%),
+    linear-gradient(135deg, rgb(255, 255, 255) 50%, transparent 50%);
+    // linear-gradient(to right, rgb(131, 131, 131), #ccc);
+    background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+
+    &:hover, &:focus {
+        background-color: rgba(27, 26, 27, 0.671);
+    }
+
+    option {
+        cursor: pointer;
+    }
+}
+
+.iconButton {
+    font-size: 1.6rem;
+    appearance: none;
+    width: 46px;
+    height: 46px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+    user-select: none;
+    
+    &:hover {
+        background: rgba(31, 30, 30, 0.295);
+
+        &:active {
+            background: rgba(31, 30, 30, 0.404);
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

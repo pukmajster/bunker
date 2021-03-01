@@ -26,65 +26,14 @@ section {
 
 #main {
     padding: 0 21px;
-    padding-top: 25vh;
-    height: 100vh;
+    padding-top: 21vh;
+    padding-bottom: 15vh;
+    // height: 100vh;
 }
 
-#Bookmarks {
-    user-select: none;
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
-    grid-gap: 15px;
-
-    .Bookmark {
-        display: grid;
-        grid-template-columns: 42px 1fr;
-        padding: 6px 0;
-
-        background-color: rgba(47, 43, 48, 0.568);
-        border-radius: 5px;
-        backdrop-filter: blur(12px);
-
-        transition: box-shadow .2s ease,  background-color .2s ease,;
-
-        &:hover {
-            box-shadow:
-            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-            0 6.7px 5.3px rgba(0, 0, 0, 0.048);
-
-            background-color: rgba(110, 103, 112, 0.226);
-            background-color: rgba(27, 26, 27, 0.671);
-        }
-
-        .BookmarkIcon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .BookmarkInfo {
-
-            
-
-
-            .BookmarkInfo_Label {
-                
-                
-
-            }
-
-            .BookmarkInfo_Url {
-                font-size: .7rem;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    #Bookmarks {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+@import './partials/bookmarks';
+@import './partials/snow';
+@import './partials/inputs';
 
 #Clock {
     font-size: 3rem;
@@ -96,6 +45,7 @@ section {
     user-select: none;
     margin-bottom: 12px;
 }
+
 
 #Toolbar {
     display: flex;
@@ -120,68 +70,6 @@ section {
 }
 
 
-input {
-    background: none;
-    box-shadow: none;
-    outline: none;
-
-    border: none;
-    padding:
-    12px
-    6px
-    10px
-    12px;
-
-    font-size: 1rem;
-    width: 100%;
-    
-    max-width: 600px;
-    height: 100%;
-
-    color: white;
-
-    background-color: rgba(47, 43, 48, 0.568);
-    border-radius: 5px;
-
-    transition: box-shadow .2s ease,  background-color .2s ease,;
-
-    &:hover, &:focus {
-        box-shadow:
-        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
-
-        background-color: rgba(110, 103, 112, 0.226);
-        background-color: rgba(27, 26, 27, 0.671);
-    }
-}
-
-.iconButton {
-    font-size: 1.6rem;
-    appearance: none;
-    width: 46px;
-    height: 46px;
-    border: none;
-    outline: none;
-    border-radius: 50%;
-    background: transparent;
-    cursor: pointer;
-    color: white;
-    user-select: none;
-    
-    &:hover {
-        background: rgba(31, 30, 30, 0.295);
-
-        &:active {
-            background: rgba(31, 30, 30, 0.404);
-        }
-    }
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
 #Background_LocalVideo {
     position: fixed;
     top: -500px;
@@ -199,7 +87,17 @@ a {
     height: 100vh;
     z-index: -54;
     background-size: cover;
+    background-image: url('../media/wallpaper1080.jpg');
+    background-image: url('http://cdn.wallpaperhi.com/1920x1080/20120714/nature%20trees%20dark%20forest%20mist%20sunlight%201920x1080%20wallpaper_www.wallpaperhi.com_40.jpg');
+    background-image: url('https://images.wallpaperscraft.com/image/forest_trees_fog_110131_1920x1080.jpg');
+    background-image: url('https://cdn.hipwallpaper.com/i/65/76/HErnXq.jpg');
+    background-image: url('https://wallpaperaccess.com/full/96689.jpg');
+    background-image: url('https://images.wallpapersden.com/image/download/misty-foggy-forest_a2dmbmuUmZqaraWkpJRmbmdlrWZlbWU.jpg');
+
+
+    background-image: url('https://www.desktopbackground.org/download/o/2012/11/16/484735_misty-morning-in-the-hills-wallpapers-nature-wallpapers_1920x1080_h.jpg');
     background-image: url('../media/wallpaper1080.png');
+
 }
 
 $drawerWidth: 360px;
@@ -224,10 +122,16 @@ $drawerOffset: 15px;
     .DrawerHeader {
         margin-top: 12px;
         padding: 12px 24px;
+        padding: 12px 48px;
         
         h3 {
             font-weight: 600;
         }
+    }
+
+    .DrawerCaption {
+        margin-bottom: 3px;
+        font-size: .8rem;
     }
 }
 
@@ -243,11 +147,11 @@ $drawerOffset: 15px;
     .SteamGame_Backdrop {
         position: absolute;
         top: calc($drawerWidth / 2);
+        top: 0;
         left: 0;
         width: $drawerWidth;
         z-index: -6;
         opacity: 0;
-        
         transform: scale(1.2);
     }
     
@@ -266,7 +170,6 @@ $drawerOffset: 15px;
 
         .SteamGame_Backdrop {
             opacity: 1;
-
             // I chose to not always blur the backdrop, but only when hovered.
             // This is because if we move blurred elements around, we get weird blur artifacting on non-moving blur elements.
             // Good job, Chrome. 
@@ -292,65 +195,8 @@ $drawerOffset: 15px;
     }
 }
 
-
 ::-webkit-scrollbar {
     width: 0;
 }
 
-::-webkit-scrollbar-track {
-    // display: none;
-}
-
-// https://codepen.io/alphardex/pen/dyPorwJ
-#Snow {
-    position: fixed;
-    top: 0;;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -5;
-}
-
-@function random_range($min, $max) {
-    $rand: random();
-    $random_range: $min + floor($rand * (($max - $min) + 1));
-    @return $random_range;
-  }
-  
-  .snow {
-    $total: 200;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-  
-    @for $i from 1 through $total {
-      $random-x: random(1000000) * 0.0001vw;
-      $random-offset: random_range(-100000, 100000) * 0.0001vw;
-      $random-x-end: $random-x + $random-offset;
-      $random-x-end-yoyo: $random-x + ($random-offset / 2);
-      $random-yoyo-time: random_range(30000, 80000) / 100000;
-      $random-yoyo-y: $random-yoyo-time * 100vh;
-      $random-scale: random(10000) * 0.0001;
-      $fall-duration: random_range(10, 30) * 1s;
-      $fall-delay: random(30) * -1s;
-  
-      &:nth-child(#{$i}) {
-        opacity: random(10000) * 0.0001;
-        transform: translate($random-x, -10px) scale($random-scale);
-        animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
-      }
-  
-      @keyframes fall-#{$i} {
-        #{percentage($random-yoyo-time)} {
-          transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
-        }
-  
-        to {
-          transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
-        }
-      }
-    }
-  }
   

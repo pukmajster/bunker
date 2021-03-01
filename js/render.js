@@ -1,3 +1,11 @@
+const localKeys = {
+    vrLang: 'vrLang'
+}
+
+const languages = [
+    { label: 'English', code: 'en-US' },
+    { label: 'Slovenščina', code: 'sl' },
+]
 
 
 
@@ -5,7 +13,6 @@ function Root() {
     return html`
     ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
         <section id="main"  class="animate__animated animate__fadeIn">
-
             
             <div id="Toolbar" >
                 ${Clock()}
@@ -49,6 +56,96 @@ function Root() {
                     baseUrl: 'https://vss.scv.si',
                 })}
             </div>
+
+            <div id="Bookmarks2" >
+                ${BookmarkCategory({
+                    label: 'Social Media',
+                    children: `
+                        ${Bookmark2({
+                            label: 'Facebook',
+                            url: 'https://www.facebook.com'
+                        })}
+                        ${Bookmark2({
+                            label: 'Instagram',
+                            url: 'https://www.instagram.com'
+                        })}
+                        ${Bookmark2({
+                            label: 'Reddit',
+                            url: 'https://www.reddit.com'
+                        })}
+                        ${Bookmark2({
+                            label: 'Twitter',
+                            url: 'https://twitter.com'
+                        })}
+                    `
+                })}
+
+                ${BookmarkCategory({
+                    label: 'Entertainment',
+                    children: `
+                        ${Bookmark({
+                            label: 'YouTube',
+                            url: 'https://www.youtube.com'
+                        })}
+
+                        ${Bookmark2({
+                            label: 'Twitch',
+                            url: 'https://www.twitch.com'
+                        })}
+                    `
+                })}
+
+                ${BookmarkCategory({
+                    label: 'Productivity',
+                    children: `
+                        ${Bookmark2({
+                            label: 'GitHub',
+                            url: 'https://github.com/pukmajster',
+                            baseUrl: 'https://www.github.com',
+                            logoUrl: 'https://github.com/pukmajster',
+                        })}
+                        ${Bookmark2({
+                            label: 'Gmail',
+                            url: 'https://mail.google.com'
+                        })}
+                        ${Bookmark2({
+                            label: 'Messages',
+                            url: 'https://messages.google.com/web/conversations',
+                            baseUrl: 'https://messages.google.com',
+                            
+                        })}
+                    `
+                })}
+
+                ${BookmarkCategory({
+                    label: 'Education',
+                    children: `
+                        ${Bookmark2({
+                            label: 'Urnik',
+                            url: 'http://212.235.170.57/ve_urniki/Urniki_5_2020_2021_razredi_II_sem/R_1__INF_R_A.htm',
+                            baseUrl: 'https://vss.scv.si',
+                        })} 
+
+                        ${Bookmark2({
+                            label: 'VSS',
+                            url: 'http://vss.scv.si/sl',
+                            baseUrl: 'https://vss.scv.si',
+                        })} 
+                    `
+                })}
+
+<!--                 
+                ${Bookmark2({
+                    label: 'Twitch',
+                    url: 'https://www.twitch.com'
+                })}
+                
+                ${Bookmark2({
+                    label: 'VSS',
+                    url: 'http://vss.scv.si/sl',
+                    baseUrl: 'https://vss.scv.si',
+                })} -->
+            </div>
         </section>
 
         ${GamesDrawer()}
@@ -76,6 +173,35 @@ function Bookmark({ label, url, baseUrl,  }) {
             </div>
         </a>
     `
+}
+
+function Bookmark2({ label, url, baseUrl, logoUrl }) {
+
+    let displayUrl = (baseUrl ?? url).replace('https://', '')
+
+    return html`
+        <a target="_system" href="${url ?? baseUrl}"  >
+            <div class="Bookmark" >
+                <div class="BookmarkIcon" >
+                    <img height="16" width="16" src='http://www.google.com/s2/favicons?sz=192&domain_url=${logoUrl ?? baseUrl ?? url}' />
+                </div>
+
+                <div class="BookmarkInfo" >
+                    <div class="BookmarkInfo_Label" >${label}</div>
+                    <div class="BookmarkInfo_Url" >${displayUrl}</div>
+                </div>
+            </div>
+        </a>
+    `
+}
+
+function BookmarkCategory({label, children}) {
+    return html`
+        <div class="BookmarkCategory" >
+            <div class="BookmarkCategory_Label">${label}</div>
+            <div class="BookmarkCategory_Bookmarks">${children}</div>
+        </div>
+    `;
 }
 
 function Clock() {
@@ -116,7 +242,7 @@ function SearchBox() {
     return html`
         <div id="SearchBox" >
             <div class="blur" >
-                <input id="Search_Input" type="text" placeholder="Google" />
+                <input  id="Search_Input" type="text" placeholder="Google" />
             </div>
 
             <button id="Search_VoiceRecognition" class="iconButton"  > <i class="bi bi-mic"></i> </button>
@@ -141,6 +267,17 @@ function GamesDrawer() {
                 ${SteamGame({ id: 1238810,      title: 'Battlefield V',                     logoHash: 'efa4f81c3558c637a107e9ac36fd11996022110c'})}
                 ${SteamGame({ id: 1172470,      title: 'Apex Legends',                      logoHash: 'b43afd1b01edf1bcea4556ef9c8c15570c8fd940'})}
             </div>
+
+            <div class="DrawerHeader" >
+                <h3>Options</h3>    
+            </div>
+
+            <div class="DrawerContent " > 
+                <div style="padding: 0 33px" >
+                    <p class="DrawerCaption" >Voice Recognition</p>
+                    ${LanguageSelector()}
+                </div>
+            </div>
         </div>
     `
 }
@@ -161,209 +298,45 @@ function SteamGame({ id, title, logoHash }) {
     `
 }
 
-function Snow() {
+
+
+
+function setLang(value) {
+    localStorage.setItem(localKeys.vrLang, value);
+    recognitionHandle = value;
+    location.reload();
+}
+
+
+function LanguageSelector() {
+    let defaultVrLang = localStorage.getItem(localKeys.vrLang);
+
+    if(!defaultVrLang) {
+        defaultVrLang = languages[0].code;
+        localStorage.setItem(localKeys.vrLang, defaultVrLang)
+    }
+
+    
     return html`
-        <div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
-<div class="snow"></div>
+        <select onchange="setLang(this.value)"  >
+            ${ languages.map(lang => html`<option value=${lang.code} ${defaultVrLang === lang.code ? 'selected' : ''} >${lang.label}</option>>`) }
+        </select>
     `
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+function Snow() {
+    return html`<div class="snow"></div>`.repeat(200)
 }
 
 function Render(html) {
