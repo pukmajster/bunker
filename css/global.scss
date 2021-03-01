@@ -34,6 +34,7 @@ section {
 @import './partials/bookmarks';
 @import './partials/snow';
 @import './partials/inputs';
+@import './partials/toolbar';
 
 #Clock {
     font-size: 3rem;
@@ -47,10 +48,18 @@ section {
 }
 
 
-#Toolbar {
+#Top {
     display: flex;
     flex-direction: column;
     margin-bottom: 2em;
+}
+
+#TimePanel {
+    // display: inline-block;
+    // border-radius: 5px;
+    // padding: 6px 0 6px 22px;
+    // margin-bottom: 12px;
+    // backdrop-filter: blur(53px);;
 }
 
 #SearchBox {
@@ -122,7 +131,7 @@ $drawerOffset: 15px;
     .DrawerHeader {
         margin-top: 12px;
         padding: 12px 24px;
-        padding: 12px 48px;
+        padding: 12px 45px;
         
         h3 {
             font-weight: 600;

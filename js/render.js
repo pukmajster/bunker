@@ -14,7 +14,7 @@ function Root() {
     ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
         <section id="main"  class="animate__animated animate__fadeIn">
             
-            <div id="Toolbar" >
+            <div id="Top" >
                 ${Clock()}
                 ${SearchBox()}
             </div>
@@ -66,6 +66,10 @@ function Root() {
                             url: 'https://www.facebook.com'
                         })}
                         ${Bookmark2({
+                            label: 'Messenger',
+                            url: 'https://www.messenger.com'
+                        })}
+                        ${Bookmark2({
                             label: 'Instagram',
                             url: 'https://www.instagram.com'
                         })}
@@ -114,6 +118,11 @@ function Root() {
                             baseUrl: 'https://messages.google.com',
                             
                         })}
+                        ${Bookmark2({
+                            label: 'Spreadsheets',
+                            url: 'https://docs.google.com/spreadsheets/u/0/',
+                            baseUrl: 'https://docs.google.com',
+                        })}
                     `
                 })}
 
@@ -149,6 +158,9 @@ function Root() {
         </section>
 
         ${GamesDrawer()}
+
+        <!-- ${Toolbar()} -->
+
         <div id="Snow">
             ${Snow()}
         </div>
@@ -206,8 +218,12 @@ function BookmarkCategory({label, children}) {
 
 function Clock() {
     return html`
-        <div id="Clock"></div>
-        <div id="Date"></div>
+        <div>
+            <div id="TimePanel" >
+                <div id="Clock"></div>
+                <div id="Date"></div>
+            </div>
+        </div>
     `;
 }
 
@@ -283,6 +299,9 @@ function GamesDrawer() {
 }
 
 function SteamGame({ id, title, logoHash }) {
+
+    let logo = !!logoHash ? `https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/${id}/${logoHash}.ico` :  'media/steam_icon_logo.svg'
+
     return html`
         <a href="steam://rungameid/${id}" >
             
@@ -291,7 +310,7 @@ function SteamGame({ id, title, logoHash }) {
                         <a href="steam://rungameid/${id}" target="_blank"  >PLAY</a>
                     </div> -->
                 <img  class="SteamGame_Backdrop" src="https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/capsule_616x353.jpg" width="300" />
-                <img class="SteamGame_Icon" width="46" src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/${id}/${logoHash}.ico" />
+                <img class="SteamGame_Icon" width="46" src="${logo}" />
                 <div class="SteamGame_Label" >${title}</div>
             </div>
         </a>
@@ -315,14 +334,48 @@ function LanguageSelector() {
         defaultVrLang = languages[0].code;
         localStorage.setItem(localKeys.vrLang, defaultVrLang)
     }
-
     
     return html`
         <select onchange="setLang(this.value)"  >
             ${ languages.map(lang => html`<option value=${lang.code} ${defaultVrLang === lang.code ? 'selected' : ''} >${lang.label}</option>>`) }
         </select>
     `
-    
+}
+
+
+function Toolbar() {
+    return html`
+        <div id="Toolbar" >
+            ${ToolbarItem({ 
+                url: 'https://docs.google.com/spreadsheets',
+                icon: 'bi-file-word'
+            })}
+            ${ToolbarItem({ 
+                url: 'https://docs.google.com/spreadsheets',
+                icon: 'bi-file-excel'
+            })}
+            ${ToolbarItem({ 
+                url: 'https://docs.google.com/spreadsheets',
+                icon: 'bi-file-fpowerpoint'
+            })}
+            ${ToolbarItem({ 
+                url: 'https://docs.google.com/spreadsheets',
+                icon: 'bi-google-drive gg-arrow-right'
+            })}
+            ${ToolbarItem({ 
+                url: 'https://docs.google.com/spreadsheets',
+                icon: 'file-word'
+            })}
+        </div>
+    `
+}
+
+function ToolbarItem({url, icon}) {
+    return html`
+        <div class="Toolbar_Item" >
+            <i  class="bi  fas ${icon}"></i>
+        </div>
+    `
 }
 
 
