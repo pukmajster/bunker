@@ -1,0 +1,98 @@
+{
+    "bookmarks": [
+        {
+            "category": "Social Media",
+            "bookmarks": [
+                {
+                    "label": "Facebook",
+                    "url": "https://www.facebook.com"
+                },
+                {
+                    "label": "Messenger",
+                    "url": "https://www.messenger.com"
+                },
+                {
+                    "label": "Instagram",
+                    "url": "https://www.instagram.com"
+                },
+                {
+                    "label": "Reddit",
+                    "url": "https://www.reddit.com"
+                },
+                {
+                    "label": "Twitter",
+                    "url": "https://www.twitter.com"
+                }
+            ]
+        },
+        {
+            "category": "Entertainment",
+            "bookmarks": [
+                {
+                    "label": "YouTube",
+                    "url": "https://www.youtube.com"
+                },
+                {
+                    "label": "Twitch",
+                    "url": "https://www.twitch.com"
+                }
+            ]
+        },
+        {
+            "category": "Productivity",
+            "bookmarks": [
+                {
+                    "label": "GitHub",
+                    "url": "https://github.com/pukmajster",
+                    "baseUrl": "https://www.github.com",
+                    "logoUrl": "https://github.com/pukmajster"
+                },
+                {
+                    "label": "Gmail",
+                    "url": "https://mail.google.com"
+                },
+                {
+                    "label": "Docs",
+                    "url": "https://docs.google.com/document/u/0/",
+                    "baseUrl": "https://docs.google.com"
+                },
+                {
+                    "label": "Spreadsheets",
+                    "url": "https://docs.google.com/spreadsheets/u/0/",
+                    "baseUrl": "https://docs.google.com"
+                }
+            ]
+        },
+        {
+            "category": "Education",
+            "bookmarks": [
+                {
+                    "label": "Urnik",
+                    "url": "http://212.235.170.57/ve_urniki/Urniki_5_2020_2021_razredi_II_sem/R_1__INF_R_A.htm",
+                    "baseUrl": "https://vss.scv.si"
+                },
+                {
+                    "label": "Arnes Učilnice",
+                    "url": "https://ucilnice.arnes.si/"
+                },
+                {
+                    "label": "VSS",
+                    "url": "http://vss.scv.si/sl",
+                    "baseUrl": "https://vss.scv.si"
+                }
+            ]
+        }
+    ],
+
+    "steamgames": [
+        { "id": 730,          "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" },
+        { "id": 550,          "title": "Left 4 Dead 2",                     "logoHash": "1a8d50f6078b5d023582ea1793b0e53813d57b7f" },
+        { "id": 232090,       "title": "Killing Floor 2",                   "logoHash": "98ab6d7da74551839cba1896f012f5e7398072a8" },
+        { "id": 1238840,      "title": "Battlefield 1",                     "logoHash": "435ac4a7011c6d09328d70f9a2cc7616ab6c10ca" },
+        { "id": 1238810,      "title": "Battlefield V",                     "logoHash": "efa4f81c3558c637a107e9ac36fd11996022110c" },
+        { "id": 1172470,      "title": "Apex Legends",                      "logoHash": "b43afd1b01edf1bcea4556ef9c8c15570c8fd940" }
+    ],
+
+    "voiceRegLanguage": "sl",
+    "snow": false
+}

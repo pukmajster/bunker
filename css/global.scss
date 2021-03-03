@@ -25,8 +25,8 @@ section {
 }
 
 #main {
-    padding: 0 21px;
-    padding-top: 21vh;
+    padding: 0 25px;
+    padding-top: 16vh;
     padding-bottom: 15vh;
     // height: 100vh;
 }
@@ -110,7 +110,7 @@ section {
 }
 
 $drawerWidth: 360px;
-$drawerOffset: 15px;
+$drawerOffset: 25px;
 
 .DrawerRoot {
     position: fixed;
@@ -120,7 +120,7 @@ $drawerOffset: 15px;
     background-color: white;
     color: black;
     width: $drawerWidth;
-    opacity: 0;;
+    opacity: .05;;
     transition: left 0.2s ease, opacity 0.2s ease;
 
     &:hover {
@@ -204,8 +204,65 @@ $drawerOffset: 15px;
     }
 }
 
+
+.EditorRoot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.932);
+    textarea {
+        width: 100vw;
+        flex: 1;
+        background: transparent;
+        color: white;
+        outline: none;
+        border: none;
+        padding: 15px;
+        resize: none;
+    }
+
+    &.open {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Editor_Actions {
+        display: grid;
+        grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+        grid-gap: 15px;
+        padding: 15px;
+        background: rgba(12, 12, 12, 0.938);
+        // box-shadow: 0 -2px  6px 3px rgba(51, 51, 51, 0.205);
+    }
+}
+
 ::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar {
     width: 0;
 }
 
   
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #00000033;
+    border-radius: 15px;
+}
+ 
+*:hover > ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.671);
+
+    &:hover {
+        background: rgb(255, 255, 255);
+    }
+}

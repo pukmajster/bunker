@@ -19,128 +19,16 @@ function Root() {
                 ${SearchBox()}
             </div>
             
-            <div id="Bookmarks" >
-                ${Bookmark({
-                    label: 'YouTube',
-                    url: 'https://www.youtube.com'
-                })}
-                ${Bookmark({
-                    label: 'Facebook',
-                    url: 'https://www.facebook.com'
-                })}
-                ${Bookmark({
-                    label: 'Instagram',
-                    url: 'https://www.instagram.com'
-                })}
-                ${Bookmark({
-                    label: 'Reddit',
-                    url: 'https://www.reddit.com'
-                })}
-                
-                ${Bookmark({
-                    label: 'Twitch',
-                    url: 'https://www.twitch.com'
-                })}
-                ${Bookmark({
-                    label: 'Gmail',
-                    url: 'https://mail.google.com'
-                })}
-                ${Bookmark({
-                    label: 'Messages',
-                    url: 'https://messages.google.com/web/conversations',
-                    baseUrl: 'https://messages.google.com'
-                })}
-                ${Bookmark({
-                    label: 'VSS',
-                    url: 'http://vss.scv.si/sl',
-                    baseUrl: 'https://vss.scv.si',
-                })}
-            </div>
+     
 
             <div id="Bookmarks2" >
-                ${BookmarkCategory({
-                    label: 'Social Media',
-                    children: `
-                        ${Bookmark2({
-                            label: 'Facebook',
-                            url: 'https://www.facebook.com'
-                        })}
-                        ${Bookmark2({
-                            label: 'Messenger',
-                            url: 'https://www.messenger.com'
-                        })}
-                        ${Bookmark2({
-                            label: 'Instagram',
-                            url: 'https://www.instagram.com'
-                        })}
-                        ${Bookmark2({
-                            label: 'Reddit',
-                            url: 'https://www.reddit.com'
-                        })}
-                        ${Bookmark2({
-                            label: 'Twitter',
-                            url: 'https://twitter.com'
-                        })}
-                    `
-                })}
 
-                ${BookmarkCategory({
-                    label: 'Entertainment',
-                    children: `
-                        ${Bookmark({
-                            label: 'YouTube',
-                            url: 'https://www.youtube.com'
-                        })}
+                ${config.bookmarks.map(category => BookmarkCategory({ 
+                    label: category.category,
+                    children: category.bookmarks.map(bookmark => Bookmark2(bookmark)).join('')
+                })).join('')}
+                
 
-                        ${Bookmark2({
-                            label: 'Twitch',
-                            url: 'https://www.twitch.com'
-                        })}
-                    `
-                })}
-
-                ${BookmarkCategory({
-                    label: 'Productivity',
-                    children: `
-                        ${Bookmark2({
-                            label: 'GitHub',
-                            url: 'https://github.com/pukmajster',
-                            baseUrl: 'https://www.github.com',
-                            logoUrl: 'https://github.com/pukmajster',
-                        })}
-                        ${Bookmark2({
-                            label: 'Gmail',
-                            url: 'https://mail.google.com'
-                        })}
-                        ${Bookmark2({
-                            label: 'Docs',
-                            url: 'https://docs.google.com/document/u/0/',
-                            baseUrl: 'https://docs.google.com',
-                        })}
-                        ${Bookmark2({
-                            label: 'Spreadsheets',
-                            url: 'https://docs.google.com/spreadsheets/u/0/',
-                            baseUrl: 'https://docs.google.com',
-                        })}
-                    `
-                })}
-
-                ${BookmarkCategory({
-                    label: 'Education',
-                    children: `
-                        ${Bookmark2({
-                            label: 'Urnik',
-                            url: 'http://212.235.170.57/ve_urniki/Urniki_5_2020_2021_razredi_II_sem/R_1__INF_R_A.htm',
-                            baseUrl: 'https://vss.scv.si',
-                        })} 
-
-                        ${Bookmark2({
-                            label: 'VSS',
-                            url: 'http://vss.scv.si/sl',
-                            baseUrl: 'https://vss.scv.si',
-                        })} 
-                    `
-                })}
 
 <!--                 
                 ${Bookmark2({
@@ -160,29 +48,11 @@ function Root() {
 
         <!-- ${Toolbar()} -->
 
+        ${EditorDialog({id: 'Config'})}
+
         <div id="Snow">
             ${Snow()}
         </div>
-    `
-}
-
-function Bookmark({ label, url, baseUrl,  }) {
-
-    let displayUrl = (baseUrl ?? url).replace('https://', '')
-
-    return html`
-        <a target="_blank" href="${baseUrl ?? url}"  >
-            <div class="Bookmark" >
-                <div class="BookmarkIcon" >
-                    <img height="16" width="16" src='http://www.google.com/s2/favicons?domain=${baseUrl ?? url}' />
-                </div>
-
-                <div class="BookmarkInfo" >
-                    <div class="BookmarkInfo_Label" >${label}</div>
-                    <div class="BookmarkInfo_Url" >${displayUrl}</div>
-                </div>
-            </div>
-        </a>
     `
 }
 
@@ -274,14 +144,7 @@ function GamesDrawer() {
                 <h3>Steam Games</h3>    
             </div>
 
-            <div class="DrawerContent SteamDrawer" > 
-                ${SteamGame({ id: 730,          title: 'Counter-Strike: Global Offensive',  logoHash: 'd1159d1a4d0e18da4d74f85dbb4934d7a92ace2b'})}
-                ${SteamGame({ id: 550,          title: 'Left 4 Dead 2',                     logoHash: '1a8d50f6078b5d023582ea1793b0e53813d57b7f'})}
-                ${SteamGame({ id: 232090,       title: 'Killing Floor 2',                   logoHash: '98ab6d7da74551839cba1896f012f5e7398072a8'})}
-                ${SteamGame({ id: 1238840,      title: 'Battlefield 1',                     logoHash: '435ac4a7011c6d09328d70f9a2cc7616ab6c10ca'})}
-                ${SteamGame({ id: 1238810,      title: 'Battlefield V',                     logoHash: 'efa4f81c3558c637a107e9ac36fd11996022110c'})}
-                ${SteamGame({ id: 1172470,      title: 'Apex Legends',                      logoHash: 'b43afd1b01edf1bcea4556ef9c8c15570c8fd940'})}
-            </div>
+            <div class="DrawerContent SteamDrawer" > ${config.steamgames.map(sg => SteamGame(sg)).join('')}</div>
 
             <div class="DrawerHeader" >
                 <h3>Options</h3>    
@@ -289,8 +152,11 @@ function GamesDrawer() {
 
             <div class="DrawerContent " > 
                 <div style="padding: 0 33px" >
-                    <p class="DrawerCaption" >Voice Recognition</p>
-                    ${LanguageSelector()}
+                    <!-- <p class="DrawerCaption" >Voice Recognition</p> -->
+                    <!-- ${LanguageSelector()} -->
+
+                    <p class="DrawerCaption" >Configuration</p>
+                    <button onclick="__ToggleConfigEditor()" > Configure Saferoom  </button>
                 </div>
             </div>
         </div>
@@ -302,8 +168,8 @@ function SteamGame({ id, title, logoHash }) {
     let logo = !!logoHash ? `https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/${id}/${logoHash}.ico` :  'media/steam_icon_logo.svg'
 
     return html`
+        <div>
         <a href="steam://rungameid/${id}" >
-            
             <div class="SteamGame aSteamGame--expandable" >
                 <!-- <div class="SteamGame_Actions" >
                         <a href="steam://rungameid/${id}" target="_blank"  >PLAY</a>
@@ -313,11 +179,49 @@ function SteamGame({ id, title, logoHash }) {
                 <div class="SteamGame_Label" >${title}</div>
             </div>
         </a>
+        </div>
     `
 }
 
+function __ToggleConfigEditor() {
+    let elem = document.getElementById('Editor_Config');
+    allowKeyboard = elem.classList.toggle('open');
+}
 
+function __SaveConfig() {
+    let elem = document.getElementById('EditorTextarea_Config');
+    if(elem.value) {
+        localStorage.setItem('saferoom_config_backup', config);
+        localStorage.setItem('saferoom_config', elem.value);
+        location.reload();
+    }
+}
 
+function EditorDialog({ id }) {
+
+    let cfg = localStorage.getItem('saferoom_config');
+
+    // https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
+
+    return html`
+        <div class="EditorRoot" id="Editor_${id}" >
+        
+           
+            <textarea
+                spellcheck="false"
+                id="EditorTextarea_${id}"
+
+                onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+4;return false;}"
+            >${cfg}</textarea>
+
+            <div class="Editor_Actions">
+                <button onclick="__ToggleConfigEditor()" > Close </button>
+                <button onclick="__SaveConfig()" > Save </button>
+            </div>
+
+        </div>
+    `
+}
 
 function setLang(value) {
     localStorage.setItem(localKeys.vrLang, value);
@@ -388,7 +292,7 @@ function ToolbarItem({url, icon}) {
 
 
 function Snow() {
-    return html`<div class="snow"></div>`.repeat(200)
+    return html`<div class="snow"></div>`.repeat( config.snow ? 200 : 0 )
 }
 
 function Render(html) {

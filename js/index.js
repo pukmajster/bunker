@@ -35,8 +35,8 @@ function startTime() {
 const searchElem = document.getElementById('Search_Input'); 
 
 function searchForPhrase(phrase, replace = false) {
-    if(replace) document.getElementById('Search_Input').value = phrase;
-    window.open(`https://www.google.com/search?q=${phrase}`);
+    // if(replace) document.getElementById('Search_Input').value = phrase;
+    window.open(`https://www.google.com/search?q=${phrase}`, '_blank');
 }
 
 
@@ -55,16 +55,24 @@ function prepSearchHandling(e) {
 //  Speech recognition for google search
 // -------------------------------------------------------------------------
 
-let activeSpeech = false;
-let recognitionHandle;
+var activeSpeech = false;
+var recognitionHandle;
+
 
 let toggleVoiceRecognition = () => {
+
+    let elem = document.getElementById('Search_VoiceRecognition');
+
     if(activeSpeech) {
         recognitionHandle.stop();
+        elem.innerHTML = '<i class="bi bi-mic"></i>';
+        activeSpeech = false;
     } else {
         recognitionHandle.start();
+        elem.innerHTML = '<i class="bi bi-mic-mute"></i>';
+        activeSpeech = true;
     }
-    activeSpeech = !activeSpeech;
+
 }
 
 // TODO: Fixed buggy toggling on the button
@@ -72,6 +80,7 @@ function prepSpeechRecognition() {
     try {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognition = new SpeechRecognition();
+        recognition.lang = config.voiceRegLanguage;
 
         recognitionHandle = recognition;
     }
@@ -86,7 +95,8 @@ function prepSpeechRecognition() {
 
     recognition.onspeechend = function () {
         let elem = document.getElementById('Search_VoiceRecognition');
-        elem.innerHTML = '<i class="bi bi-mic"></i>'
+        elem.innerHTML = '<i class="bi bi-mic"></i>';
+        activeSpeech = false;
     }
 
     recognition.onerror = function (event) {
@@ -95,12 +105,14 @@ function prepSpeechRecognition() {
         };
 
         let elem = document.getElementById('Search_VoiceRecognition');
-        elem.innerHTML = '<i class="bi bi-mic"></i>'
+        elem.innerHTML = '<i class="bi bi-mic"></i>';
+        activeSpeech = false;
     }
 
     recognition.onresult = function (event) {
+        activeSpeech = false;
         var transcript = event.results[event.resultIndex][0].transcript;
-        // console.log(transcript)
+        console.log(transcript)
         searchForPhrase(transcript, false);
     }
 
@@ -112,9 +124,17 @@ function prepSpeechRecognition() {
 //  Focus on the search input when pressing anykey if not already focused
 // -------------------------------------------------------------------------
 
+let allowKeyboard = false;
+
 document.addEventListener("keydown", (e) => {
+
+    if(allowKeyboard) return;
+
     if( e.keyCode === 18 ) {
         e.preventDefault();
         toggleVoiceRecognition();   
     } else document.getElementById('Search_Input')?.focus();
 }, false);
+
+
+const config = JSON.parse(localStorage.getItem('saferoom_config'));

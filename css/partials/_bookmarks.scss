@@ -79,8 +79,15 @@
         backdrop-filter: blur(12px);
         padding: 15px;
 
+        overflow: hidden;
+
         .BookmarkCategory_Label {
             margin-bottom: 5px;
+        }
+
+        .BookmarkCategory_Bookmarks {
+            max-height: 350px;
+            overflow-y: auto;
         }
     }
 
