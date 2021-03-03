@@ -7,7 +7,6 @@ function Root() {
                 ${Clock()}
                 ${SearchBox()}
             </div>
-     
 
             <div id="Bookmarks2" >
                 ${config.bookmarks.map(category => BookmarkCategory({ 
