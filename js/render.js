@@ -199,7 +199,7 @@ function __SaveConfig() {
 
 function EditorDialog({ id }) {
 
-    let cfg = localStorage.getItem('saferoom_config');
+    let cfg = localStorage.getItem('saferoom_config')  ?? defaultConfig;
 
     // https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
 
