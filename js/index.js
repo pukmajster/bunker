@@ -137,4 +137,4 @@ document.addEventListener("keydown", (e) => {
 }, false);
 
 
-const config = JSON.parse(localStorage.getItem('saferoom_config'));
+const config = JSON.parse(localStorage.getItem('saferoom_config') ?? `{"bookmarks": [],"steamgames": [],"voiceRegLanguage": "en-US","snow": false}`);
