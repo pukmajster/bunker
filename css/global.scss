@@ -55,11 +55,11 @@ section {
 }
 
 #TimePanel {
-    // display: inline-block;
+    display: inline-block;
     // border-radius: 5px;
     // padding: 6px 0 6px 22px;
     // margin-bottom: 12px;
-    // backdrop-filter: blur(53px);;
+    backdrop-filter: blur(53px);;
 }
 
 #SearchBox {
@@ -107,6 +107,11 @@ section {
     background-image: url('https://www.desktopbackground.org/download/o/2012/11/16/484735_misty-morning-in-the-hills-wallpapers-nature-wallpapers_1920x1080_h.jpg');
     background-image: url('../media/wallpaper1080.png');
 
+}
+
+.image-preload {
+	position: absolute;
+	left: -9999px;
 }
 
 $drawerWidth: 360px;

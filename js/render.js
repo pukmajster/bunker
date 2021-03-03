@@ -1,6 +1,11 @@
 function Root() {
     return html`
-    ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
+
+        <!-- https://tympanus.net/Development/RainEffect/index.html -->
+        ${config.rain && `<canvas width="1" height="1" id="container" style="position:absolute; z-index: -1"></canvas>`}
+
+
+        ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
         <section id="main"  class="animate__animated animate__fadeIn">
             
             <div id="Top" >
