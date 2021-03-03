@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     prepSearchHandling();
 });
 
+const defaultConfig = `{
+    "bookmarks": [],
+    "steamgames": [],
+    "voiceRegLanguage": "en-US",
+    "snow": false,
+    "background": {
+        
+    }
+}`;
+
+const config = JSON.parse(localStorage.getItem('saferoom_config') ?? defaultConfig);
+
 
 // -------------------------------------------------------------------------
 //  Clockwork
@@ -136,11 +148,3 @@ document.addEventListener("keydown", (e) => {
     } else document.getElementById('Search_Input')?.focus();
 }, false);
 
-const defaultConfig = `{
-    "bookmarks": [],
-    "steamgames": [],
-    "voiceRegLanguage": "en-US",
-    "snow": false
-}`;
-
-const config = JSON.parse(localStorage.getItem('saferoom_config') ?? defaultConfig);
