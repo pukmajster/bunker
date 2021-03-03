@@ -147,17 +147,11 @@ function GamesDrawer() {
             <div class="DrawerContent SteamDrawer" > ${config.steamgames.map(sg => SteamGame(sg)).join('')}</div>
 
             <div class="DrawerHeader" >
-                <h3>Options</h3>    
+                <h3>Configuration</h3>    
             </div>
 
-            <div class="DrawerContent " > 
-                <div style="padding: 0 33px" >
-                    <!-- <p class="DrawerCaption" >Voice Recognition</p> -->
-                    <!-- ${LanguageSelector()} -->
-
-                    <p class="DrawerCaption" >Configuration</p>
-                    <button onclick="__ToggleConfigEditor()" > Configure Saferoom  </button>
-                </div>
+            <div class="DrawerContent SteamDrawer_Configuration" > 
+                <button onclick="__ToggleConfigEditor()" > Configure Bunker </button>
             </div>
         </div>
     `
@@ -188,25 +182,44 @@ function __ToggleConfigEditor() {
     allowKeyboard = elem.classList.toggle('open');
 }
 
+function __RevertEditorChanges() {
+    let elem = document.getElementById('EditorTextarea_Config');
+    elem.value = localStorage.getItem('saferoom_config') ?? defaultConfig;
+    document.getElementById('Editor_AbortedSave').classList.remove('open');
+}
+
+function __LoadConfigBackup() {
+    let elem = document.getElementById('EditorTextarea_Config');
+    let backup = localStorage.getItem('saferoom_config_backup');
+    if(backup) {
+        elem.value = backup;
+        document.getElementById('Editor_AbortedSave').classList.remove('open');
+    }
+}
+
 function __SaveConfig() {
     let elem = document.getElementById('EditorTextarea_Config');
-    if(elem.value) {
-        localStorage.setItem('saferoom_config_backup', config);
+    let json = elem.value;
+
+    try {
+        JSON.parse(json);
+        localStorage.setItem('saferoom_config_backup', localStorage.getItem('saferoom_config'));
         localStorage.setItem('saferoom_config', elem.value);
         location.reload();
+    } catch (e) {
+        console.log('Invalid JSON. Aborting.');
+        document.getElementById('Editor_AbortedSave').classList.add('open');
     }
 }
 
 function EditorDialog({ id }) {
 
-    let cfg = localStorage.getItem('saferoom_config')  ?? defaultConfig;
+    let cfg = localStorage.getItem('saferoom_config') ?? defaultConfig;
 
     // https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
 
     return html`
         <div class="EditorRoot" id="Editor_${id}" >
-        
-           
             <textarea
                 spellcheck="false"
                 id="EditorTextarea_${id}"
@@ -216,7 +229,11 @@ function EditorDialog({ id }) {
 
             <div class="Editor_Actions">
                 <button onclick="__ToggleConfigEditor()" > Close </button>
+                <button onclick="__RevertEditorChanges()" > Revert Changes </button>
+                <button onclick="__LoadConfigBackup()" > Load Backup </button>
                 <button onclick="__SaveConfig()" > Save </button>
+
+                <span id="Editor_AbortedSave" >Invalid JSON! Save aborted.</span>
             </div>
 
         </div>

@@ -111,6 +111,7 @@ section {
 
 $drawerWidth: 360px;
 $drawerOffset: 25px;
+$drawerContentPadding: 23px;
 
 .DrawerRoot {
     position: fixed;
@@ -130,8 +131,8 @@ $drawerOffset: 25px;
 
     .DrawerHeader {
         margin-top: 12px;
-        padding: 12px 24px;
-        padding: 12px 45px;
+        padding: 12px $drawerContentPadding;
+        // padding: 12px 45px;
         
         h3 {
             font-weight: 600;
@@ -142,10 +143,14 @@ $drawerOffset: 25px;
         margin-bottom: 3px;
         font-size: .8rem;
     }
+
+    .SteamDrawer_Configuration {
+        padding: 0 $drawerContentPadding;
+    }
 }
 
 .SteamGame {
-    padding: 0 23px;
+    padding-left: ($drawerContentPadding - 6px);
     display: flex;
     align-items: center;
     position: relative;
@@ -211,33 +216,58 @@ $drawerOffset: 25px;
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 999999999999999;
+    
+    opacity: 0;
+    pointer-events: none;
 
-    display: none;
+    // background-color: rgba(0, 0, 0, 0.932);
+    background-color: rgba(0, 0, 0, 0.432);
+    backdrop-filter: blur(15px);
 
-    background-color: rgba(0, 0, 0, 0.932);
     textarea {
-        width: 100vw;
+        // width: calc(100vw - 5px);
         flex: 1;
         background: transparent;
         color: white;
         outline: none;
         border: none;
-        padding: 15px;
+        padding: 10px;
+        margin: 5px;
         resize: none;
+        padding-bottom: 75px;
     }
 
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
     &.open {
-        display: flex;
-        flex-direction: column;
+        
+
+        opacity: 1;
+        pointer-events: inherit ;
     }
 
     .Editor_Actions {
         display: grid;
-        grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+        grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
         grid-gap: 15px;
         padding: 15px;
         background: rgba(12, 12, 12, 0.938);
+        background: rgba(211, 211, 211, 0.212);
+        // backdrop-filter: blur(15px);
+        align-items: center;
         // box-shadow: 0 -2px  6px 3px rgba(51, 51, 51, 0.205);
+    }
+
+    #Editor_AbortedSave {
+        color: rgb(241, 64, 64);
+        visibility: hidden;
+        font-weight: 500;
+
+        &.open {
+            visibility: visible;
+        }
     }
 }
 
