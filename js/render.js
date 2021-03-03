@@ -1,14 +1,3 @@
-const localKeys = {
-    vrLang: 'vrLang'
-}
-
-const languages = [
-    { label: 'English', code: 'en-US' },
-    { label: 'Slovenščina', code: 'sl' },
-]
-
-
-
 function Root() {
     return html`
     ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
@@ -18,36 +7,17 @@ function Root() {
                 ${Clock()}
                 ${SearchBox()}
             </div>
-            
      
 
             <div id="Bookmarks2" >
-
                 ${config.bookmarks.map(category => BookmarkCategory({ 
                     label: category.category,
                     children: category.bookmarks.map(bookmark => Bookmark2(bookmark)).join('')
                 })).join('')}
-                
-
-
-<!--                 
-                ${Bookmark2({
-                    label: 'Twitch',
-                    url: 'https://www.twitch.com'
-                })}
-                
-                ${Bookmark2({
-                    label: 'VSS',
-                    url: 'http://vss.scv.si/sl',
-                    baseUrl: 'https://vss.scv.si',
-                })} -->
             </div>
         </section>
 
         ${GamesDrawer()}
-
-        <!-- ${Toolbar()} -->
-
         ${EditorDialog({id: 'Config'})}
 
         <div id="Snow">
@@ -163,16 +133,13 @@ function SteamGame({ id, title, logoHash }) {
 
     return html`
         <div>
-        <a href="steam://rungameid/${id}" >
-            <div class="SteamGame aSteamGame--expandable" >
-                <!-- <div class="SteamGame_Actions" >
-                        <a href="steam://rungameid/${id}" target="_blank"  >PLAY</a>
-                    </div> -->
-                <img  class="SteamGame_Backdrop" src="https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/capsule_616x353.jpg" width="300" />
-                <img class="SteamGame_Icon" width="46" src="${logo}" />
-                <div class="SteamGame_Label" >${title}</div>
-            </div>
-        </a>
+            <a href="steam://rungameid/${id}" >
+                <div class="SteamGame aSteamGame--expandable" >
+                    <img  class="SteamGame_Backdrop" src="https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/capsule_616x353.jpg" width="300" />
+                    <img class="SteamGame_Icon" width="46" src="${logo}" />
+                    <div class="SteamGame_Label" >${title}</div>
+                </div>
+            </a>
         </div>
     `
 }
@@ -246,7 +213,6 @@ function setLang(value) {
     location.reload();
 }
 
-
 function LanguageSelector() {
     let defaultVrLang = localStorage.getItem(localKeys.vrLang);
 
@@ -261,7 +227,6 @@ function LanguageSelector() {
         </select>
     `
 }
-
 
 function Toolbar() {
     return html`
@@ -298,16 +263,6 @@ function ToolbarItem({url, icon}) {
     `
 }
 
-
-
-
-
-
-
-
-
-
-
 function Snow() {
     return html`<div class="snow"></div>`.repeat( config.snow ? 200 : 0 )
 }
@@ -317,7 +272,6 @@ function Render(html) {
 
     if( root ) {
         root.innerHTML = html;
-        // console.log(html)
     }
 }
 
