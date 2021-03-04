@@ -98,7 +98,7 @@ function BackgroundImageUrl() {
         mist: `
             pointer-events: none;
             z-index: -;
-            background-image: url('/media/bunker-mist-1.png');
+            background-image: url('./media/bunker-mist-1.png');
             background-size: cover;
             opacity: ${(config.background?.mist?.opacity ?? 0.7) / 100} 
         `
