@@ -1,6 +1,22 @@
 function Root() {
     return html`
-        ${BackgroundImageUrl({ url: 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'})}
+
+        <style>
+            .glass {
+                background-color: ${config.glass.background};
+                backdrop-filter: blur(${config.glass.blur}px)
+            }
+
+            .glass---hover:hover {
+                background-color: ${config.glass.backgroundHover};
+            }
+
+            input.glass---hover:focus {
+                background-color: ${config.glass.backgroundHover};
+            }
+        </style>
+
+        ${BackgroundImageUrl()}
         <section id="main"  class="animate__animated animate__fadeIn">
             
             <div id="Top" >
@@ -15,6 +31,8 @@ function Root() {
                 })).join('')}
             </div>
         </section>
+
+        <!-- ${Toolbar()} -->
 
         ${GamesDrawer()}
         ${EditorDialog({id: 'Config'})}
@@ -31,7 +49,7 @@ function Bookmark2({ label, url, baseUrl, logoUrl }) {
 
     return html`
         <a target="_system" href="${url ?? baseUrl}"  >
-            <div class="Bookmark" >
+            <div class="Bookmark " >
                 <div class="BookmarkIcon" >
                     <img height="16" width="16" src='http://www.google.com/s2/favicons?sz=192&domain_url=${logoUrl ?? baseUrl ?? url}' />
                 </div>
@@ -47,7 +65,7 @@ function Bookmark2({ label, url, baseUrl, logoUrl }) {
 
 function BookmarkCategory({label, children}) {
     return html`
-        <div class="BookmarkCategory" >
+        <div class="BookmarkCategory glass" >
             <div class="BookmarkCategory_Label">${label}</div>
             <div class="BookmarkCategory_Bookmarks">${children}</div>
         </div>
@@ -73,9 +91,39 @@ function BackgroundLocalVideo() {
     `
 }
 
-function BackgroundImageUrl({url}) {
+function BackgroundImageUrl() {
+
+    let styles = {
+        image: `background-image: url('${config?.background?.url ?? 'https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg'}'); ${config?.background?.css ?? ''}`,
+        mist: `
+            pointer-events: none;
+            z-index: -;
+            background-image: url('/media/bunker-mist-1.png');
+            background-size: cover;
+            opacity: ${(config.background?.mist?.opacity ?? 0.7) / 100} 
+        `
+    }
+
+    let mist = (config.background?.mist?.enabled ?? false)
+    ?
+    `
+        <div id="background-mist1" class="background-mist" style="${styles.mist}" >
+        </div>
+        
+        <div id="background-mist2" class="background-mist" style="${styles.mist}" >
+        </div>
+    `
+    : '';
+        
+    
+    ``
+
     return html`
-        <div id="Background_ImageUrl" style="${config?.background?.css ?? ''}" ></div>
+        <div id="Background_ImageUrl" style="${styles.image}">
+            
+        </div>
+
+        ${mist}
     `
 }
 
@@ -89,12 +137,14 @@ function GoogleSearchBarIframe() {
     `
 }
 
-
 function SearchBox() {
     return html`
         <div id="SearchBox" >
-            <div class="blur" >
-                <input  id="Search_Input" type="text" placeholder="Google" />
+
+            <img id="SearchBoxIcon" width="24" src="/media/icons8-google-50.png" alt="Goole Searhc" />
+
+            <div class="blur glass" >
+                    <input id="Search_Input" class="glass---hover" type="text"  />
             </div>
 
             <button id="Search_VoiceRecognition" class="iconButton"  > <i class="bi bi-mic"></i> </button>
@@ -104,15 +154,25 @@ function SearchBox() {
 }
 
 function GamesDrawer() {
-    return html`
-        <div class="DrawerRoot" >
 
+    const steamGames = 
+        config.steamGames && (config.steamGames.length > 0)
+        ?
+        `
             <div class="DrawerHeader" >
                 <h3>Steam Games</h3>    
             </div>
 
-            <div class="DrawerContent SteamDrawer" > ${config.steamgames.map(sg => SteamGame(sg)).join('')}</div>
+            <div class="DrawerContent SteamDrawer" > ${config.steamGames.map(sg => SteamGame(sg)).join('')}</div>
+        `
+        : ''
 
+
+    return html`
+        <div class="DrawerRoot" >
+
+            ${steamGames}
+            
             <div class="DrawerHeader" >
                 <h3>Configuration</h3>    
             </div>
@@ -132,14 +192,28 @@ function SteamGame({ id, title, logoHash }) {
         <div>
             <a href="steam://rungameid/${id}" >
                 <div class="SteamGame aSteamGame--expandable" >
-                    <img  class="SteamGame_Backdrop" src="https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/capsule_616x353.jpg" width="300" />
-                    <img class="SteamGame_Icon" width="46" src="${logo}" />
+                    <img class="SteamGame_Backdrop" src="https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/capsule_616x353.jpg" width="300" alt="game backdrop" />
+                    <img class="SteamGame_Icon" width="46" src="${logo}" alt="game logo" />
                     <div class="SteamGame_Label" >${title}</div>
                 </div>
             </a>
         </div>
     `
 }
+
+function setEditorError(text) {
+    let elem = document.getElementById('Editor_ErrorMessage');
+    elem.classList.add('open');
+    elem.innerHTML = text;
+}
+
+function clearEditorError() {
+    let elem = document.getElementById('Editor_ErrorMessage');
+    // elem.classList.remove('');
+    elem.innerHTML = '&nbsp;';
+}
+
+
 
 function __ToggleConfigEditor() {
     let elem = document.getElementById('Editor_Config');
@@ -149,16 +223,26 @@ function __ToggleConfigEditor() {
 function __RevertEditorChanges() {
     let elem = document.getElementById('EditorTextarea_Config');
     elem.value = localStorage.getItem('saferoom_config') ?? defaultConfig;
-    document.getElementById('Editor_AbortedSave').classList.remove('open');
+    clearEditorError();
 }
 
 function __LoadConfigBackup() {
     let elem = document.getElementById('EditorTextarea_Config');
     let backup = localStorage.getItem('saferoom_config_backup');
-    if(backup) {
+
+    clearEditorError();
+    if(backup != null) {
         elem.value = backup;
         document.getElementById('Editor_AbortedSave').classList.remove('open');
+        clearEditorError();
+    } else {
+        setEditorError('No previous config found!');
     }
+}
+
+function __ClearConfig() {
+    localStorage.removeItem('saferoom_config');
+    location.reload();
 }
 
 function __SaveConfig() {
@@ -170,14 +254,16 @@ function __SaveConfig() {
         localStorage.setItem('saferoom_config_backup', localStorage.getItem('saferoom_config'));
         localStorage.setItem('saferoom_config', elem.value);
         location.reload();
+        clearEditorError();
+
+        return 0;
     } catch (e) {
-        console.log('Invalid JSON. Aborting.');
-        document.getElementById('Editor_AbortedSave').classList.add('open');
+        // alert('error!?')
+        setEditorError("Invalid JSON, save aborted!");
     }
 }
 
 function EditorDialog({ id }) {
-
     let cfg = localStorage.getItem('saferoom_config') ?? defaultConfig;
 
     // https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
@@ -191,15 +277,24 @@ function EditorDialog({ id }) {
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+4;return false;}"
             >${cfg}</textarea>
 
-            <div class="Editor_Actions">
-                <button onclick="__ToggleConfigEditor()" > Close </button>
-                <button onclick="__RevertEditorChanges()" > Revert Changes </button>
-                <button onclick="__LoadConfigBackup()" > Load Backup </button>
-                <button onclick="__SaveConfig()" > Save </button>
+            <div class="Editor_Toolbar">
 
-                <span id="Editor_AbortedSave" >Invalid JSON! Save aborted.</span>
+                <div id="Editor_ErrorMessage" > &nbsp; </div>
+
+
+                <div class="Editor_Actions">
+                    <button onclick="__ToggleConfigEditor()" > Close </button>
+                    
+                    
+                    <button onclick="__ClearConfig()" > Clear Config </button>
+                    <button onclick="__RevertEditorChanges()" > Revert Changes </button>
+                    <button onclick="__LoadConfigBackup()" > Load Previous </button>
+
+                    <button onclick="__SaveConfig()" > Save </button>
+
+                </div>
+
             </div>
-
         </div>
     `
 }
@@ -261,8 +356,17 @@ function ToolbarItem({url, icon}) {
 }
 
 function Snow() {
-    return html`<div class="snow"></div>`.repeat( config.snow ? 200 : 0 )
+    return html`<div class="snow"></div>`.repeat( config.background?.snow?.enabled ? (config.background?.snow?.count ?? 200) : 0 )
 }
+
+
+
+
+
+
+
+
+
 
 function Render(html) {
     let root = document.querySelector('bunker');

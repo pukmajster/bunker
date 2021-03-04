@@ -31,6 +31,7 @@ section {
     // height: 100vh;
 }
 
+@import './partials/background';
 @import './partials/bookmarks';
 @import './partials/snow';
 @import './partials/inputs';
@@ -68,6 +69,15 @@ section {
     width: 100%;
     border-radius: 5px;
     overflow: hidden;
+    position: relative;
+
+    #SearchBoxIcon {
+        position: absolute;
+        left: 15px;
+        top: 11px;
+        z-index: 1;
+        filter: invert(100%);
+    }
 
     .blur {
         display: inline-block;
@@ -75,6 +85,11 @@ section {
         max-width: 480px;
         border-radius: 5px;
         backdrop-filter: blur(12px);;
+
+    }
+
+    input {
+        text-indent: 35px;
     }
 }
 
@@ -96,16 +111,16 @@ section {
     height: 100vh;
     z-index: -54;
     background-size: cover;
-    background-image: url('../media/wallpaper1080.jpg');
-    background-image: url('http://cdn.wallpaperhi.com/1920x1080/20120714/nature%20trees%20dark%20forest%20mist%20sunlight%201920x1080%20wallpaper_www.wallpaperhi.com_40.jpg');
-    background-image: url('https://images.wallpaperscraft.com/image/forest_trees_fog_110131_1920x1080.jpg');
-    background-image: url('https://cdn.hipwallpaper.com/i/65/76/HErnXq.jpg');
-    background-image: url('https://wallpaperaccess.com/full/96689.jpg');
-    background-image: url('https://images.wallpapersden.com/image/download/misty-foggy-forest_a2dmbmuUmZqaraWkpJRmbmdlrWZlbWU.jpg');
+    // background-image: url('../media/wallpaper1080.jpg');
+    // background-image: url('http://cdn.wallpaperhi.com/1920x1080/20120714/nature%20trees%20dark%20forest%20mist%20sunlight%201920x1080%20wallpaper_www.wallpaperhi.com_40.jpg');
+    // background-image: url('https://images.wallpaperscraft.com/image/forest_trees_fog_110131_1920x1080.jpg');
+    // background-image: url('https://cdn.hipwallpaper.com/i/65/76/HErnXq.jpg');
+    // background-image: url('https://wallpaperaccess.com/full/96689.jpg');
+    // background-image: url('https://images.wallpapersden.com/image/download/misty-foggy-forest_a2dmbmuUmZqaraWkpJRmbmdlrWZlbWU.jpg');
 
 
-    background-image: url('https://www.desktopbackground.org/download/o/2012/11/16/484735_misty-morning-in-the-hills-wallpapers-nature-wallpapers_1920x1080_h.jpg');
-    background-image: url('../media/wallpaper1080.png');
+    // background-image: url('https://www.desktopbackground.org/download/o/2012/11/16/484735_misty-morning-in-the-hills-wallpapers-nature-wallpapers_1920x1080_h.jpg');
+    // background-image: url('../media/wallpaper1080.png');
 
 }
 
@@ -114,6 +129,7 @@ $drawerOffset: 25px;
 $drawerContentPadding: 23px;
 
 .DrawerRoot {
+    z-index: 5;
     position: fixed;
     top: 0;
     left: -$drawerWidth + $drawerOffset;
@@ -121,7 +137,8 @@ $drawerContentPadding: 23px;
     background-color: white;
     color: black;
     width: $drawerWidth;
-    opacity: .05;;
+    opacity: .05;
+    will-change: opacity;
     transition: left 0.2s ease, opacity 0.2s ease;
 
     &:hover {
@@ -217,7 +234,7 @@ $drawerContentPadding: 23px;
     width: 100vw;
     height: 100vh;
     z-index: 999999999999999;
-    
+    // transform: translatex(-100vw);
     opacity: 0;
     pointer-events: none;
 
@@ -238,19 +255,20 @@ $drawerContentPadding: 23px;
         padding-bottom: 75px;
     }
 
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
     &.open {
-        
+        transform: translatex(0);
 
         opacity: 1;
         pointer-events: inherit ;
     }
 
-    .Editor_Actions {
-        display: grid;
-        grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
+    .Editor_Toolbar {
+        // display: flex;
+        // justify-content: space-between;
+        align-items: center;
         grid-gap: 15px;
         padding: 15px;
         background: rgba(12, 12, 12, 0.938);
@@ -258,12 +276,29 @@ $drawerContentPadding: 23px;
         // backdrop-filter: blur(15px);
         align-items: center;
         // box-shadow: 0 -2px  6px 3px rgba(51, 51, 51, 0.205);
+
+        span {
+            // flex: 1;
+        }
     }
 
-    #Editor_AbortedSave {
+    .Editor_Actions {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat( auto-fill, minmax(160px, 1fr), );
+        grid-gap: 15px;
+        // padding: 15px;
+        // backdrop-filter: blur(15px);
+        align-items: center;
+        // box-shadow: 0 -2px  6px 3px rgba(51, 51, 51, 0.205);
+    }
+
+    #Editor_ErrorMessage {
         color: rgb(241, 64, 64);
-        visibility: hidden;
+        // visibility: hidden;
         font-weight: 500;
+        user-select: none;
+        padding-bottom: 5px;
 
         &.open {
             visibility: visible;

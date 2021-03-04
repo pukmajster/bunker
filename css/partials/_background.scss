@@ -1,0 +1,44 @@
+
+#background-mist1 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background-repeat: repeat;
+    animation: backgound-mist-anim 1100000s linear 0s infinite normal;
+    background-attachment: scroll
+}
+  
+#background-mist2 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // opacity: 0.05;
+  
+    background-repeat: repeat;
+    animation: backgound-mist-anim2 1100000s linear 0s infinite normal;
+    background-attachment: scroll;
+}
+  
+@keyframes backgound-mist-anim {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 50000000px;
+    }
+}
+  
+@keyframes backgound-mist-anim2 {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: -50000000px;
+    }
+}
+  

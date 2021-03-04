@@ -5,16 +5,82 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 const defaultConfig = `{
-    "bookmarks": [],
-    "steamgames": [],
-    "voiceRegLanguage": "en-US",
-    "snow": false,
+    "bookmarks": [
+        {
+            "category": "Social Media",
+            "bookmarks": [
+                { "label": "Facebook",              "url": "https://www.facebook.com" },
+                { "label": "Messenger",             "url": "https://www.messenger.com" },
+                { "label": "Instagram",             "url": "https://www.instagram.com" },
+                { "label": "Reddit",                "url": "https://www.reddit.com" },
+                { "label": "Twitter",               "url": "https://www.twitter.com" }
+            ]
+        },
+        {
+            "category": "Entertainment",
+            "bookmarks": [
+                { "label": "YouTube",               "url": "https://www.youtube.com" },
+                { "label": "Twitch",                "url": "https://www.twitch.com" }
+            ]
+        }
+    ],
+
+    "steamGames": [
+        { "id": 730,          "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" }
+    ],
+
+    "voiceRecognitionLanguage": "en-US",
+
     "background": {
-        
+        "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
+        "snow": {
+            "enabled": true,
+            "count": 200
+        },
+        "mist": {
+            "enabled": false,
+            "opacity": 5
+        },
+        "css": "filter: blur(0px) saturate(150%); transform: scale(1.1); opacity: 1"
     }
 }`;
 
-const config = JSON.parse(localStorage.getItem('saferoom_config') ?? defaultConfig);
+const baseConfig = `{
+    "bookmarks": [
+        
+    ],
+
+    "steamGames": [
+        
+    ],
+
+    "voiceRecognitionLanguage": "en-US",
+
+    "glass": {
+        "background": "rgba(47, 43, 48, 0.568)",
+        "backgroundHover": "rgba(47, 43, 48, 0.568)",
+        "blur": 12
+    },
+
+    "background": {
+        "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
+        "snow": {
+            "enabled": false,
+            "count": 200
+        },
+        "mist": {
+            "enabled": false,
+            "opacity": 5
+        },
+        "css": ""
+    }
+}`;
+
+
+const configLoad = JSON.parse(localStorage.getItem('saferoom_config') ?? defaultConfig);
+// const config = {...JSON.parse(baseConfig), ...configLoad}
+const config = Object.assign(JSON.parse(baseConfig), configLoad)
+console.log(config);
 
 
 // -------------------------------------------------------------------------
@@ -92,7 +158,7 @@ function prepSpeechRecognition() {
     try {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognition = new SpeechRecognition();
-        recognition.lang = config.voiceRegLanguage;
+        recognition.lang = config.voiceRecognitionLanguage ?? 'en-US';
 
         recognitionHandle = recognition;
     }

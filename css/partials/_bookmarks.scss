@@ -69,14 +69,14 @@
 #Bookmarks2 {
     user-select: none;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
     grid-gap: 15px;
     align-items: baseline;
 
     .BookmarkCategory {
-        background-color: rgba(47, 43, 48, 0.568);
+        // background-color: rgba(47, 43, 48, 0.568);
         border-radius: 5px;
-        backdrop-filter: blur(12px);
+        // backdrop-filter: blur(12px);
         padding: 15px;
 
         overflow: hidden;
