@@ -3,11 +3,11 @@
 
 
 ## Index
-![Index](/media/example-main.png)
+![Index](/media/example-main.PNG)
 
 
 ## Sidebar
-![Sidebar](/media/example-sidebar.png)
+![Sidebar](/media/example-sidebar.PNG)
 
 ## Config
-![Config](/media/example-config.png)
+![Config](/media/example-config.PNG)
