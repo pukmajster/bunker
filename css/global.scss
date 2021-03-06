@@ -136,6 +136,7 @@ $drawerContentPadding: 23px;
     bottom: 0;
     background-color: white;
     color: black;
+    backdrop-filter: blur(0px);
     width: $drawerWidth;
     opacity: .05;
     will-change: opacity;
