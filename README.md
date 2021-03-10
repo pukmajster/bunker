@@ -58,11 +58,13 @@ The "logoHash" attribute of games can be found on https://steamdb.info/.
 }
 ```
 
-## Index
+## Screenshots
+
+### Index
 ![Index](/media/example-main.PNG)
 
-## Sidebar
+### Sidebar
 ![Sidebar](/media/example-sidebar.PNG)
 
-## Config
+### Config
 ![Config](/media/example-config.PNG)
