@@ -16,23 +16,23 @@ The "logoHash" attribute of games can be found on https://steamdb.info/.
         {
             "category": "Social Media",
             "bookmarks": [
-                { "label": "Facebook",              "url": "https://www.facebook.com" },
-                { "label": "Messenger",             "url": "https://www.messenger.com" },
-                { "label": "Instagram",             "url": "https://www.instagram.com" }
+                { "label": "Facebook",          "url": "https://www.facebook.com" },
+                { "label": "Messenger",         "url": "https://www.messenger.com" },
+                { "label": "Instagram",         "url": "https://www.instagram.com" }
             ]
         },
         {
             "category": "Entertainment",
             "bookmarks": [
-                { "label": "YouTube",               "url": "https://www.youtube.com" },
-                { "label": "Twitch",                "url": "https://www.twitch.com" }
+                { "label": "YouTube",           "url": "https://www.youtube.com" },
+                { "label": "Twitch",            "url": "https://www.twitch.com" }
             ]
         }
     ],
 
     "steamGames": [
-        { "id": 730,          "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" },
-        { "id": 550,          "title": "Left 4 Dead 2",                     "logoHash": "1a8d50f6078b5d023582ea1793b0e53813d57b7f" }
+        { "id": 730,      "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" },
+        { "id": 550,      "title": "Left 4 Dead 2",                     "logoHash": "1a8d50f6078b5d023582ea1793b0e53813d57b7f" }
     ],
 
     "voiceRecognitionLanguage": "en-US",
