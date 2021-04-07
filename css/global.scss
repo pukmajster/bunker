@@ -34,7 +34,6 @@ section {
 @import './partials/bookmarks';
 @import './partials/snow';
 @import './partials/inputs';
-@import './partials/toolbar';
 
 #Clock {
     font-size: 3rem;
@@ -277,7 +276,6 @@ $drawerContentPadding: 23px;
 body::-webkit-scrollbar {
     width: 0;
 }
-
   
 ::-webkit-scrollbar-track {
     background: #00000000;
