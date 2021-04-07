@@ -5,10 +5,10 @@
 
 Here is an example of a valid Bunker configuration. Invalid JSON will be blocked, so make sure you get it right!
 
-## Steam Games
-
 To remove the "Steam Games" section of the sidebar, simply remove the "steamGames" key. 
+
 The "logoHash" attribute of games can be found on https://steamdb.info/.
+
 sidebar.useFaviconKit switches from google's S2 to FaviconKit for fetching favicons.
 
 ```
