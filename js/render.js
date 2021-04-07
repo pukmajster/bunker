@@ -49,11 +49,25 @@ function Bookmark({ label, url, baseUrl, logoUrl }) {
 
     let displayUrl = (baseUrl ?? url).replace('https://', '')
 
+    // Prep the URL for FaviconKit
+    let safeUrl = (logoUrl ?? baseUrl ?? url).replace('https://', '');
+    safeUrl.replace('http://', '');
+
+    let logoSrc =
+    config.bookmarkOptions.useFaviconKit
+    ?
+    `https://api.faviconkit.com/${safeUrl}/16`
+    :
+    `http://www.google.com/s2/favicons?sz=192&domain_url=${logoUrl ?? baseUrl ?? url}`
+
+    let target = config.bookmarkOptions.alwaysOpenInNewTab ? '_blank' : '';
+    let rel = config.bookmarkOptions.alwaysOpenInNewTab ? 'noopener' : '';
+
     return html`
-        <a target="_system" href="${url ?? baseUrl}"  >
+        <a target="${rel}" href="${url ?? baseUrl}" rel="${rel}" >
             <div class="Bookmark " >
                 <div class="BookmarkIcon" >
-                    <img height="16" width="16" src='http://www.google.com/s2/favicons?sz=192&domain_url=${logoUrl ?? baseUrl ?? url}' />
+                    <img height="16" width="16" src='${logoSrc}' />
                 </div>
 
                 <div class="BookmarkInfo" >

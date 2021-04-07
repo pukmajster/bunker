@@ -28,7 +28,7 @@ const defaultConfig = `{
 
     "bookmarkOptions": {
         "alwaysOpenInNewTab": true,
-        "useFavicoKit": false
+        "useFaviconKit": false
     },
 
     "steamGames": [
@@ -74,7 +74,7 @@ const baseConfig = `{
 
     "bookmarkOptions": {
         "alwaysOpenInNewTab": true,
-        "useFavicoKit": false
+        "useFaviconKit": false
     },
 
     "steamGames": [
