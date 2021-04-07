@@ -68,17 +68,20 @@ button:not(.iconButton) {
         0 2.8px 2.2px rgba(0, 0, 0, 0.034),
         0 6.7px 5.3px rgba(0, 0, 0, 0.11);
 
-        background-color: rgba(110, 103, 112, 0.226);
-        background-color: rgba(27, 26, 27, 0.671);
+        // background-color: rgba(110, 103, 112, 0.226);
+        // background-color: rgba(27, 26, 27, 0.671);
+        background-color: rgba(47, 43, 48, 0.668);
 
         &:focus {
             box-shadow:
             0 6.8px 6.2px rgba(0, 0, 0, 0.034),
             0 3.7px 8.3px rgba(0, 0, 0, 0.41);
     
-            background-color: rgba(27, 26, 27, 0.815);
+            background-color: rgba(47, 43, 48, 0.768);
         }
     }
+
+    
 }
 
 select {

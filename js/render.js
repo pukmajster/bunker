@@ -214,12 +214,12 @@ function __RevertEditorChanges() {
 
 function __LoadConfigBackup() {
     let elem = document.getElementById('EditorTextarea_Config');
+    console.log(elem);
     let backup = localStorage.getItem('saferoom_config_backup');
 
     clearEditorError();
     if(backup != null) {
         elem.value = backup;
-        document.getElementById('Editor_AbortedSave').classList.remove('open');
         clearEditorError();
     } else {
         setEditorError('No previous config found!');
