@@ -39,6 +39,12 @@ const defaultConfig = `{
         "language": "en-US"
     },
 
+    "glass": {
+        "background": "rgba(47, 43, 48, 0.568)",
+        "backgroundHover": "rgba(47, 43, 48, 0.568)",
+        "blur": 12
+    },
+
     "background": {
         "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
         "snow": {
