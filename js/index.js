@@ -31,7 +31,7 @@ const defaultConfig = `{
     ],
 
     "sidebar": {
-        "disableTransparency": false
+        "idleOpacity": 0.06
     },
 
     "voiceReg": {
@@ -65,7 +65,7 @@ const baseConfig = `{
     ],
 
     "sidebar": {
-        "disableTransparency": false
+        "idleOpacity": 0.06
     },
 
     "voiceReg": {

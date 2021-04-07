@@ -157,9 +157,8 @@ function GamesDrawer() {
         `
         : ''
 
-
     return html`
-        <div class="DrawerRoot" >
+        <div class="DrawerRoot" style="opacity: ${config.sidebar.idleOpacity.toString()};" >
 
             ${steamGames}
             
