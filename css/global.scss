@@ -57,6 +57,7 @@ section {
     flex: 0;
     display: flex;
     width: 100%;
+    min-height: 46px; // Due to unforeseen consequences, the textbox slighty shrinks when there is no voiceReg toggle button in the parent container.
     border-radius: 5px;
     overflow: hidden;
     position: relative;
@@ -68,6 +69,7 @@ section {
         z-index: 1;
         filter: invert(100%);
         user-select: none;
+        pointer-events: none;
     }
 
     .blur {
