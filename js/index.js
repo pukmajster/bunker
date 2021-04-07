@@ -26,6 +26,11 @@ const defaultConfig = `{
         }
     ],
 
+    "bookmarkOptions": {
+        "alwaysOpenInNewTab": true,
+        "useFavicoKit": false
+    },
+
     "steamGames": [
         { "id": 730,          "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" }
     ],
@@ -42,6 +47,7 @@ const defaultConfig = `{
     "glass": {
         "background": "rgba(47, 43, 48, 0.568)",
         "backgroundHover": "rgba(47, 43, 48, 0.568)",
+        "editorBackground": "rgba(0,0,0, 0.868)",
         "blur": 12
     },
 
@@ -66,6 +72,11 @@ const baseConfig = `{
         
     ],
 
+    "bookmarkOptions": {
+        "alwaysOpenInNewTab": true,
+        "useFavicoKit": false
+    },
+
     "steamGames": [
         
     ],
@@ -82,6 +93,7 @@ const baseConfig = `{
     "glass": {
         "background": "rgba(47, 43, 48, 0.568)",
         "backgroundHover": "rgba(47, 43, 48, 0.568)",
+        "editorBackground": "rgba(0,0,0, 0.868)",
         "blur": 12
     },
 

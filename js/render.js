@@ -14,6 +14,10 @@ function Root() {
             input.glass---hover:focus {
                 background-color: ${config.glass.backgroundHover};
             }
+
+            .EditorRoot {
+                background-color: ${config.glass.editorBackground};
+            }
         </style>
 
         ${BackgroundImageUrl()}
