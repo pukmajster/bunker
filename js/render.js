@@ -27,12 +27,10 @@ function Root() {
             <div id="Bookmarks2" >
                 ${config.bookmarks.map(category => BookmarkCategory({ 
                     label: category.category,
-                    children: category.bookmarks.map(bookmark => Bookmark2(bookmark)).join('')
+                    children: category.bookmarks.map(bookmark => Bookmark(bookmark)).join('')
                 })).join('')}
             </div>
         </section>
-
-        <!-- ${Toolbar()} -->
 
         ${GamesDrawer()}
         ${EditorDialog({id: 'Config'})}
@@ -43,7 +41,7 @@ function Root() {
     `
 }
 
-function Bookmark2({ label, url, baseUrl, logoUrl }) {
+function Bookmark({ label, url, baseUrl, logoUrl }) {
 
     let displayUrl = (baseUrl ?? url).replace('https://', '')
 
@@ -81,14 +79,6 @@ function Clock() {
             </div>
         </div>
     `;
-}
-
-function BackgroundLocalVideo() {
-    return html`
-        <div id="Background_LocalVideo" >
-            <video autoplay muted loop src="media/openingscreen.webm"></video>
-        </div>
-    `
 }
 
 function BackgroundImageUrl() {
@@ -209,7 +199,6 @@ function setEditorError(text) {
 
 function clearEditorError() {
     let elem = document.getElementById('Editor_ErrorMessage');
-    // elem.classList.remove('');
     elem.innerHTML = '&nbsp;';
 }
 
@@ -217,7 +206,7 @@ function clearEditorError() {
 
 function __ToggleConfigEditor() {
     let elem = document.getElementById('Editor_Config');
-    allowKeyboard = elem.classList.toggle('open');
+    allowKeyboard = !elem.classList.toggle('open');
 }
 
 function __RevertEditorChanges() {
@@ -295,62 +284,6 @@ function EditorDialog({ id }) {
                 </div>
 
             </div>
-        </div>
-    `
-}
-
-function setLang(value) {
-    localStorage.setItem(localKeys.vrLang, value);
-    recognitionHandle = value;
-    location.reload();
-}
-
-function LanguageSelector() {
-    let defaultVrLang = localStorage.getItem(localKeys.vrLang);
-
-    if(!defaultVrLang) {
-        defaultVrLang = languages[0].code;
-        localStorage.setItem(localKeys.vrLang, defaultVrLang)
-    }
-    
-    return html`
-        <select onchange="setLang(this.value)"  >
-            ${ languages.map(lang => html`<option value=${lang.code} ${defaultVrLang === lang.code ? 'selected' : ''} >${lang.label}</option>>`) }
-        </select>
-    `
-}
-
-function Toolbar() {
-    return html`
-        <div id="Toolbar" >
-            ${ToolbarItem({ 
-                url: 'https://docs.google.com/spreadsheets',
-                icon: 'bi-file-word'
-            })}
-            ${ToolbarItem({ 
-                url: 'https://docs.google.com/spreadsheets',
-                icon: 'bi-file-excel'
-            })}
-            ${ToolbarItem({ 
-                url: 'https://docs.google.com/spreadsheets',
-                icon: 'bi-file-fpowerpoint'
-            })}
-            ${ToolbarItem({ 
-                url: 'https://docs.google.com/spreadsheets',
-                icon: 'bi-google-drive gg-arrow-right'
-            })}
-            ${ToolbarItem({ 
-                url: 'https://docs.google.com/spreadsheets',
-                icon: 'file-word'
-            })}
-        </div>
-    `
-}
-
-function ToolbarItem({url, icon}) {
-    return html`
-        <div class="Toolbar_Item" >
-            <i  class="bi  fas ${icon}"></i>
         </div>
     `
 }
