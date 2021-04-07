@@ -52,7 +52,7 @@ const defaultConfig = `{
     },
 
     "background": {
-        "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
+        "url": "https://wallpaperaccess.com/full/7285.jpg",
         "snow": {
             "enabled": false,
             "count": 200
@@ -98,7 +98,7 @@ const baseConfig = `{
     },
 
     "background": {
-        "url": "",
+        "url": "https://wallpaperaccess.com/full/7285.jpg",
         "snow": {
             "enabled": false,
             "count": 200

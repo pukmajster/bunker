@@ -272,7 +272,7 @@ function EditorDialog({ id }) {
     // Props to https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
 
     return html`
-        <div class="EditorRoot" id="Editor_${id}" >
+        <div class="EditorRoot glass" id="Editor_${id}" >
             <textarea
                 spellcheck="false"
                 id="EditorTextarea_${id}"
