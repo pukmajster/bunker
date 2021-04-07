@@ -204,7 +204,7 @@ function clearEditorError() {
 
 function __ToggleConfigEditor() {
     let elem = document.getElementById('Editor_Config');
-    allowKeyboard = !elem.classList.toggle('open');
+    allowKeyboard = elem.classList.toggle('open');
 }
 
 function __RevertEditorChanges() {
