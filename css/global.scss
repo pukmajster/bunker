@@ -77,21 +77,11 @@ section {
         width: 100%;
         max-width: 480px;
         border-radius: 5px;
-        // backdrop-filter: blur(12px);
     }
 
     input {
         text-indent: 35px;
     }
-}
-
-#Background_LocalVideo {
-    position: fixed;
-    top: -500px;
-    left: -300px;
-    z-index: -43;
-
-    filter: blur(14px);
 }
 
 #Background_ImageUrl {
