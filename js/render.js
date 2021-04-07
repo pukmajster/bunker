@@ -137,7 +137,7 @@ function SearchBox() {
                     <input id="Search_Input" class="glass---hover" type="text"  />
             </div>
 
-            <button id="Search_VoiceRecognition" class="iconButton"  > <i class="bi bi-mic"></i> </button>
+            ${config.voiceReg.enabled && '<button id="Search_VoiceRecognition" class="iconButton"  > <i class="bi bi-mic"></i> </button>'}
 
         </div>
     `
@@ -202,8 +202,6 @@ function clearEditorError() {
     elem.innerHTML = '&nbsp;';
 }
 
-
-
 function __ToggleConfigEditor() {
     let elem = document.getElementById('Editor_Config');
     allowKeyboard = !elem.classList.toggle('open');
@@ -247,7 +245,6 @@ function __SaveConfig() {
 
         return 0;
     } catch (e) {
-        // alert('error!?')
         setEditorError("Invalid JSON, save aborted!");
     }
 }
@@ -255,7 +252,7 @@ function __SaveConfig() {
 function EditorDialog({ id }) {
     let cfg = localStorage.getItem('saferoom_config') ?? defaultConfig;
 
-    // https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
+    // Props to https://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
 
     return html`
         <div class="EditorRoot" id="Editor_${id}" >

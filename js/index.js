@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     prepSearchHandling();
 });
 
+// The default config the user starts with, also the config used when a user resets the config
 const defaultConfig = `{
     "bookmarks": [
         {
@@ -29,12 +30,19 @@ const defaultConfig = `{
         { "id": 730,          "title": "Counter-Strike: Global Offensive",  "logoHash": "d1159d1a4d0e18da4d74f85dbb4934d7a92ace2b" }
     ],
 
-    "voiceRecognitionLanguage": "en-US",
+    "sidebar": {
+        "disableTransparency": false
+    },
+
+    "voiceReg": {
+        "enabled": true,
+        "language": "en-US"
+    },
 
     "background": {
         "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
         "snow": {
-            "enabled": true,
+            "enabled": false,
             "count": 200
         },
         "mist": {
@@ -45,6 +53,8 @@ const defaultConfig = `{
     }
 }`;
 
+
+// The user config is merged with this one to make sure some important bits aren't missing
 const baseConfig = `{
     "bookmarks": [
         
@@ -54,7 +64,14 @@ const baseConfig = `{
         
     ],
 
-    "voiceRecognitionLanguage": "en-US",
+    "sidebar": {
+        "disableTransparency": false
+    },
+
+    "voiceReg": {
+        "enabled": true,
+        "language": "en-US"
+    },
 
     "glass": {
         "background": "rgba(47, 43, 48, 0.568)",
@@ -63,7 +80,7 @@ const baseConfig = `{
     },
 
     "background": {
-        "url": "https://images.wallpapersden.com/image/download/night-mountains-summer-illustration_a2plamaUmZqaraWkpJRsa25trWloaGU.jpg",
+        "url": "",
         "snow": {
             "enabled": false,
             "count": 200
@@ -78,7 +95,6 @@ const baseConfig = `{
 
 
 const configLoad = JSON.parse(localStorage.getItem('saferoom_config') ?? defaultConfig);
-// const config = {...JSON.parse(baseConfig), ...configLoad}
 const config = Object.assign(JSON.parse(baseConfig), configLoad)
 console.log(config);
 
@@ -136,8 +152,9 @@ function prepSearchHandling(e) {
 var activeSpeech = false;
 var recognitionHandle;
 
-
 let toggleVoiceRecognition = () => {
+
+    if(!config.voiceReg.enabled) return;
 
     let elem = document.getElementById('Search_VoiceRecognition');
 
@@ -155,10 +172,14 @@ let toggleVoiceRecognition = () => {
 
 // TODO: Fixed buggy toggling on the button
 function prepSpeechRecognition() {
+
+    // Don't init anything if voiceReg is disabled
+    if(!config.voiceReg.enabled) return;
+
     try {
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognition = new SpeechRecognition();
-        recognition.lang = config.voiceRecognitionLanguage ?? 'en-US';
+        recognition.lang = config.voiceReg.language ?? 'en-US';
 
         recognitionHandle = recognition;
     }
