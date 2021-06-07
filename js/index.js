@@ -203,6 +203,7 @@ function prepSpeechRecognition() {
     }
     catch (e) {
         console.error(e);
+        return;
     }
 
     recognition.onstart = function () {
